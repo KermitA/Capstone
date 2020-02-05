@@ -398,7 +398,7 @@ void setHere(uint8_t color)
 	matrix[11][4][color] = 1;
 	matrix[11][7][color] = 1;
 	
-   matrix[11][9][color] = 1;
+    matrix[11][9][color] = 1;
    
 	matrix[11][14][color] = 1;
 	matrix[11][17][color] = 1;
@@ -411,8 +411,10 @@ void setHere(uint8_t color)
 	matrix[12][4][color] = 1;
 	matrix[12][7][color] = 1;
 	
-	matrix[10][9][color] = 1;
-   
+	for(int i = 9; i<13; i++){
+		matrix[12][i][color] = 1;
+	}
+	
 	matrix[12][14][color] = 1;
 	matrix[12][17][color] = 1;
 	for(int i = 19; i<23; i++){
