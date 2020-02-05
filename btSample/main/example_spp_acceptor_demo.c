@@ -3,6 +3,7 @@
 #include <string.h>
 #include <stdbool.h>
 #include <stdio.h>
+#include "driver/i2c.h"
 #include "nvs.h"
 #include "nvs_flash.h"
 #include "freertos/FreeRTOS.h"
@@ -17,6 +18,10 @@
 #include "esp_bt_device.h"
 #include "esp_spp_api.h"
 
+
+#define I2CSDA 18 
+#define I2CSCL 19
+#define LUX_SENSOR_ADDR 0x10
 
 #define R1 12
 #define B1 13
@@ -190,8 +195,6 @@ void esp_bt_gap_cb(esp_bt_gap_cb_event_t event, esp_bt_gap_cb_param_t *param)
     return;
 }
 
-
-
 /*
 	Shifts current values of R1, B1, G1, R2, B2, G2 into the
 	shift registers pointed to by current A, B, C address
@@ -324,14 +327,14 @@ void setHere(uint8_t color)
 	
 	
 	for(int i = 4; i<7; i++){
-		matrix[4][4][color] = 1;
-		matrix[4][7][color] = 1;	
-		matrix[4][9][color] = 1;
-		matrix[4][14][color] = 1;
-		matrix[4][17][color] = 1;
-		matrix[4][19][color] = 1;
-		matrix[4][24][color] = 1;
-		matrix[4][25][color] = 1;
+		matrix[i][4][color] = 1;
+		matrix[i][7][color] = 1;	
+		matrix[i][9][color] = 1;
+		matrix[i][14][color] = 1;
+		matrix[i][17][color] = 1;
+		matrix[i][19][color] = 1;
+		matrix[i][24][color] = 1;
+		matrix[i][25][color] = 1;
 	}
 	
 	
@@ -384,9 +387,9 @@ void setHere(uint8_t color)
 	
 	matrix[10][4][color] = 1;
 	matrix[10][7][color] = 1;
-	for(int i = 9; i<12; i++){
-		matrix[10][i][color] = 1;
-	}
+	
+   matrix[10][9][color] = 1;
+   
 	matrix[10][14][color] = 1;
 	matrix[10][17][color] = 1;
 	matrix[10][19][color] = 1;
@@ -394,9 +397,9 @@ void setHere(uint8_t color)
 	
 	matrix[11][4][color] = 1;
 	matrix[11][7][color] = 1;
-	for(int i = 9; i<12; i++){
-		matrix[11][i][color] = 1;
-	}
+	
+   matrix[11][9][color] = 1;
+   
 	matrix[11][14][color] = 1;
 	matrix[11][17][color] = 1;
 	matrix[11][19][color] = 1;
@@ -407,9 +410,9 @@ void setHere(uint8_t color)
 	
 	matrix[12][4][color] = 1;
 	matrix[12][7][color] = 1;
-	for(int i = 9; i<13; i++){
-		matrix[12][i][color] = 1;
-	}
+	
+	matrix[10][9][color] = 1;
+   
 	matrix[12][14][color] = 1;
 	matrix[12][17][color] = 1;
 	for(int i = 19; i<23; i++){
@@ -652,6 +655,38 @@ void blink_task(void *pvParameter)
 
 void app_main()
 {
+	//I2C peripheral config
+	i2c_config_t luxConfig;
+	luxConfig.mode = I2C_MODE_MASTER;
+	luxConfig.sda_io_num = I2CSDA;
+	luxConfig.sda_pullup_en = GPIO_PULLUP_ENABLE;
+	luxConfig.scl_io_num = I2CSCL;
+	luxConfig.scl_pullup_en = GPIO_PULLUP_ENABLE;
+	luxConfig.master.clk_speed = 100000;
+	i2c_param_config(0, &luxConfig);
+	i2c_driver_install(0, I2C_MODE_MASTER, 0, 0, 0);
+	
+	//configure lux sensor settings
+	i2c_cmd_handle_t luxCmd = i2c_cmd_link_create();
+	i2c_master_start(luxCmd);	//Start bit
+	i2c_master_write_byte(luxCmd, (LUX_SENSOR_ADDR << 1) | I2C_MASTER_WRITE, true);	//Address
+	i2c_master_write_byte(luxCmd, 0x00, true);		//Command: Write Config
+	i2c_master_write_byte(luxCmd, 0b00000000, true); //Write Config Properties: 1 gain, 800 ms int time, etc.
+	i2c_master_write_byte(luxCmd, 0b11000000, true);
+	i2c_master_stop(luxCmd);	//stop bit
+	i2c_master_cmd_begin(0, luxCmd, 1000 / portTICK_RATE_MS);	//all 1 second to send
+	i2c_cmd_link_delete(luxCmd);
+	
+	luxCmd = i2c_cmd_link_create();
+	i2c_master_start(luxCmd);	//Start bit
+	i2c_master_write_byte(luxCmd, (LUX_SENSOR_ADDR << 1) | I2C_MASTER_WRITE, true);	//Address
+	i2c_master_write_byte(luxCmd, 0x03, true);		//Command: PowerSave
+	i2c_master_write_byte(luxCmd, 0b00000000, true); //Write Config Properties: Enable power save
+	i2c_master_write_byte(luxCmd, 0b00000000, true);
+	i2c_master_stop(luxCmd);	//stop bit
+	i2c_master_cmd_begin(0, luxCmd, 1000 / portTICK_RATE_MS);	//all 1 second to send
+	i2c_cmd_link_delete(luxCmd);
+	
 	//Bluetooth config
 	esp_err_t ret = nvs_flash_init();
     if (ret == ESP_ERR_NVS_NO_FREE_PAGES || ret == ESP_ERR_NVS_NEW_VERSION_FOUND) {
@@ -758,7 +793,31 @@ void app_main()
 	//disable task watchdog (temporary)
 	esp_task_wdt_deinit();
 	
-	//Idle task drives the matrix
+	//Task to drive LED Matrix. Tie to core 1 to avoid comm related latencies
 	xTaskCreatePinnedToCore(&blink_task, "blink_task", 4096, NULL, 5, NULL, 1);
 
+	//idle task test: Read lux sensor once every second, print to console
+	uint8_t als_MSB;
+	uint8_t als_LSB;
+	uint16_t alsVal;
+	uint32_t luxVal;
+	while(1)
+	{
+		luxCmd = i2c_cmd_link_create();
+		i2c_master_start(luxCmd);	//Start bit
+		i2c_master_write_byte(luxCmd, (LUX_SENSOR_ADDR << 1) | I2C_MASTER_WRITE, true);	//Address
+		i2c_master_write_byte(luxCmd, 0x04, true);		//Command: Read ALS (Ambient Light)
+		i2c_master_start(luxCmd);		//Start bit 
+		i2c_master_write_byte(luxCmd, (LUX_SENSOR_ADDR << 1) | I2C_MASTER_READ, true);	//specify a read from sensor
+		i2c_master_read_byte(luxCmd, &als_LSB, true);	//Read LSB
+		i2c_master_read_byte(luxCmd, &als_MSB, false);	//Read MSB, NAK
+		i2c_master_stop(luxCmd);	//stop bit
+		i2c_master_cmd_begin(0, luxCmd, 1000 / portTICK_RATE_MS);	//allow 1 second to send + read
+		i2c_cmd_link_delete(luxCmd);
+		
+		alsVal = (als_MSB << 8) | als_LSB;
+		luxVal = 0.0576 * alsVal;		//Constant retrieved from datasheet to convert ALS to lux
+		printf("ALS Val: %d       Lux Val: %d\n", alsVal, luxVal);
+		vTaskDelay(1000/portTICK_PERIOD_MS);
+	}
 }
