@@ -1,5 +1,5 @@
 example_spp_acceptor_demo.o: \
- C:/users/micha/documents/seniordesign/projects/btSample/main/example_spp_acceptor_demo.c \
+ C:/users/micha/documents/seniordesign/projects/btsample/main/example_spp_acceptor_demo.c \
  C:/esp/esp-mdf/esp-idf/components/newlib/include/stdio.h \
  C:/esp/esp-mdf/esp-idf/components/newlib/include/_ansi.h \
  C:/esp/esp-mdf/esp-idf/components/newlib/include/newlib.h \
@@ -26,7 +26,7 @@ example_spp_acceptor_demo.o: \
  C:/esp/esp-mdf/esp-idf/components/newlib/include/sys/_intsup.h \
  C:/esp/esp-mdf/esp-idf/components/esp32/include/esp_err.h \
  C:/esp/esp-mdf/esp-idf/components/newlib/platform_include/assert.h \
- C:/users/micha/documents/seniordesign/projects/btSample/build/include/sdkconfig.h \
+ C:/users/micha/documents/seniordesign/projects/btsample/build/include/sdkconfig.h \
  C:/esp/esp-mdf/esp-idf/components/newlib/include/stdlib.h \
  C:/esp/esp-mdf/esp-idf/components/newlib/include/machine/stdlib.h \
  C:/esp/esp-mdf/esp-idf/components/newlib/include/alloca.h \
@@ -86,6 +86,13 @@ example_spp_acceptor_demo.o: \
  C:/esp/esp-mdf/esp-idf/components/freertos/include/freertos/list.h \
  C:/esp/esp-mdf/esp-idf/components/freertos/include/freertos/queue.h \
  C:/esp/esp-mdf/esp-idf/components/esp_ringbuf/include/freertos/ringbuf.h \
+ C:/esp/esp-mdf/esp-idf/components/driver/include/driver/ledc.h \
+ C:/esp/esp-mdf/esp-idf/components/driver/include/driver/periph_ctrl.h \
+ C:/esp/esp-mdf/esp-idf/components/soc/esp32/include/soc/dport_reg.h \
+ C:/esp/esp-mdf/esp-idf/components/soc/esp32/include/soc/dport_access.h \
+ C:/esp/esp-mdf/esp-idf/components/esp32/include/esp_dport_access.h \
+ C:/esp/esp-mdf/esp-idf/components/soc/esp32/include/soc/uart_reg.h \
+ C:/esp/esp-mdf/esp-idf/components/soc/esp32/include/soc/periph_defs.h \
  C:/esp/esp-mdf/esp-idf/components/nvs_flash/include/nvs.h \
  C:/esp/esp-mdf/esp-idf/components/nvs_flash/include/nvs_flash.h \
  C:/esp/esp-mdf/esp-idf/components/nvs_flash/include/nvs.h \
@@ -155,7 +162,7 @@ C:/esp/esp-mdf/esp-idf/components/esp32/include/esp_err.h:
 
 C:/esp/esp-mdf/esp-idf/components/newlib/platform_include/assert.h:
 
-C:/users/micha/documents/seniordesign/projects/btSample/build/include/sdkconfig.h:
+C:/users/micha/documents/seniordesign/projects/btsample/build/include/sdkconfig.h:
 
 C:/esp/esp-mdf/esp-idf/components/newlib/include/stdlib.h:
 
@@ -275,6 +282,20 @@ C:/esp/esp-mdf/esp-idf/components/freertos/include/freertos/queue.h:
 
 C:/esp/esp-mdf/esp-idf/components/esp_ringbuf/include/freertos/ringbuf.h:
 
+C:/esp/esp-mdf/esp-idf/components/driver/include/driver/ledc.h:
+
+C:/esp/esp-mdf/esp-idf/components/driver/include/driver/periph_ctrl.h:
+
+C:/esp/esp-mdf/esp-idf/components/soc/esp32/include/soc/dport_reg.h:
+
+C:/esp/esp-mdf/esp-idf/components/soc/esp32/include/soc/dport_access.h:
+
+C:/esp/esp-mdf/esp-idf/components/esp32/include/esp_dport_access.h:
+
+C:/esp/esp-mdf/esp-idf/components/soc/esp32/include/soc/uart_reg.h:
+
+C:/esp/esp-mdf/esp-idf/components/soc/esp32/include/soc/periph_defs.h:
+
 C:/esp/esp-mdf/esp-idf/components/nvs_flash/include/nvs.h:
 
 C:/esp/esp-mdf/esp-idf/components/nvs_flash/include/nvs_flash.h:
@@ -306,4 +327,4 @@ C:/esp/esp-mdf/esp-idf/components/bt/bluedroid/api/include/api/esp_bt_defs.h:
 C:/esp/esp-mdf/esp-idf/components/bt/bluedroid/api/include/api/esp_bt_device.h:
 
 C:/esp/esp-mdf/esp-idf/components/bt/bluedroid/api/include/api/esp_spp_api.h:
-/c/users/micha/documents/seniordesign/projects/btSample/main/./example_spp_acceptor_demo.c:
+/c/users/micha/documents/seniordesign/projects/btsample/main/./example_spp_acceptor_demo.c:
