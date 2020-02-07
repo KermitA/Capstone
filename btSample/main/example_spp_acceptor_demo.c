@@ -18,6 +18,7 @@
 #include "esp_gap_bt_api.h"
 #include "esp_bt_device.h"
 #include "esp_spp_api.h"
+#include "freertos/timers.h"
 
 
 #define I2CSDA 18 
@@ -45,12 +46,6 @@
 #define SPP_TAG "SPP_ACCEPTOR_DEMO"
 #define SPP_SERVER_NAME "SPP_SERVER"
 #define EXAMPLE_DEVICE_NAME "Emergency Light Node 1"
-
-#define BRIGHTEST_DUTY_CYCLE 0
-#define BRIGHTER_DUTY_CYCLE (1 << 13) * 0.25
-#define NORMAL_DUTY_CYCLE   (1 << 13) * 0.50
-#define LOW_DUTY_CYCLE      (1 << 13) * 0.75
-#define FADEDELAY 2000
 
 static const esp_spp_mode_t esp_spp_mode = ESP_SPP_MODE_CB;
 
@@ -623,10 +618,64 @@ void printGreen()
 	}
 }
 
+void timerCallback(TimerHandle_t pxTimer)
+{
+	static uint8_t als_MSB;
+	static uint8_t als_LSB;
+	static uint16_t alsVal;
+	static uint32_t luxVal;
+	static i2c_cmd_handle_t luxCmd;
+	
+	luxCmd = i2c_cmd_link_create();
+	i2c_master_start(luxCmd);	//Start bit
+	i2c_master_write_byte(luxCmd, (LUX_SENSOR_ADDR << 1) | I2C_MASTER_WRITE, true);	//Address
+	i2c_master_write_byte(luxCmd, 0x04, true);		//Command: Read ALS (Ambient Light)
+	i2c_master_start(luxCmd);		//Start bit 
+	i2c_master_write_byte(luxCmd, (LUX_SENSOR_ADDR << 1) | I2C_MASTER_READ, true);	//specify a read from sensor
+	i2c_master_read_byte(luxCmd, &als_LSB, 0);	//Read LSB
+	i2c_master_read_byte(luxCmd, &als_MSB, 1);	//Read MSB, NAK
+	i2c_master_stop(luxCmd);	//stop bit
+	i2c_master_cmd_begin(0, luxCmd, 1000 / portTICK_RATE_MS);	//allow 1 second to send + read
+	i2c_cmd_link_delete(luxCmd);
+	
+	alsVal = (als_MSB << 8) | als_LSB;
+	luxVal = 0.0576 * alsVal;		//Constant retrieved from datasheet to convert ALS to lux
+	printf("ALS Val: %d       Lux Val: %d\n", alsVal, luxVal);
+	
+	//normal light conditions
+	if(luxVal >= 100 && luxVal < 400)
+	{
+		//change over time
+		ledc_set_fade_with_time(LEDC_HIGH_SPEED_MODE, LEDC_CHANNEL_0, NORMAL_DUTY_CYCLE, FADEDELAY);
+		ledc_fade_start(LEDC_HIGH_SPEED_MODE, LEDC_CHANNEL_0, LEDC_FADE_NO_WAIT);
+	}
+	//Brightest light conditions
+	else if (luxVal >= 900)
+	{
+		//change over time
+		ledc_set_fade_with_time(LEDC_HIGH_SPEED_MODE, LEDC_CHANNEL_0, BRIGHTEST_DUTY_CYCLE, FADEDELAY);
+		ledc_fade_start(LEDC_HIGH_SPEED_MODE, LEDC_CHANNEL_0, LEDC_FADE_NO_WAIT);
+	}
+    //Brighter light conditions
+	else if (luxVal >= 400)
+	{
+		//change over time
+		ledc_set_fade_with_time(LEDC_HIGH_SPEED_MODE, LEDC_CHANNEL_0, BRIGHTER_DUTY_CYCLE, FADEDELAY);
+		ledc_fade_start(LEDC_HIGH_SPEED_MODE, LEDC_CHANNEL_0, LEDC_FADE_NO_WAIT);
+	}
+	//Low light conditions
+	else
+	{
+		//change over time
+		ledc_set_fade_with_time(LEDC_HIGH_SPEED_MODE, LEDC_CHANNEL_0, LOW_DUTY_CYCLE, FADEDELAY);
+		ledc_fade_start(LEDC_HIGH_SPEED_MODE, LEDC_CHANNEL_0, LEDC_FADE_NO_WAIT);
+	}
+}
+
 /*
 	Task to run GPIO m8rx
 */
-void blink_task(void *pvParameter)
+void matrix_task(void *pvParameter)
 {
 	while(1) 
 	{		
@@ -664,8 +713,8 @@ void blink_task(void *pvParameter)
     }
 }
 
-void app_main()
-{	
+void init_pwm()
+{
 	//OE Dimmer PWM config
 	ledc_timer_config_t pwmConfig;
 	pwmConfig.speed_mode = LEDC_HIGH_SPEED_MODE;
@@ -683,7 +732,12 @@ void app_main()
 	
 	ledc_timer_config(&pwmConfig);
 	ledc_channel_config(&OEConfig);
+	
+	ledc_fade_func_install(0);
+}
 
+void init_i2c()
+{
 	//I2C peripheral config
 	i2c_config_t luxConfig;
 	luxConfig.mode = I2C_MODE_MASTER;
@@ -694,7 +748,7 @@ void app_main()
 	luxConfig.master.clk_speed = 100000;
 	i2c_param_config(0, &luxConfig);
 	i2c_driver_install(0, I2C_MODE_MASTER, 0, 0, 0);
-	
+
 	//configure lux sensor settings
 	i2c_cmd_handle_t luxCmd = i2c_cmd_link_create();
 	i2c_master_start(luxCmd);	//Start bit
@@ -714,11 +768,11 @@ void app_main()
 	i2c_master_write_byte(luxCmd, 0b00000000, true);
 	i2c_master_stop(luxCmd);	//stop bit
 	i2c_master_cmd_begin(0, luxCmd, 1000 / portTICK_RATE_MS);	//all 1 second to send
-	i2c_cmd_link_delete(luxCmd);
-	
-	
-	
-	
+	i2c_cmd_link_delete(luxCmd);	
+}
+
+void init_bt()
+{
 	//Bluetooth config
 	esp_err_t ret = nvs_flash_init();
     if (ret == ESP_ERR_NVS_NO_FREE_PAGES || ret == ESP_ERR_NVS_NEW_VERSION_FOUND) {
@@ -777,10 +831,11 @@ void app_main()
     esp_bt_pin_type_t pin_type = ESP_BT_PIN_TYPE_VARIABLE;
     esp_bt_pin_code_t pin_code;
     esp_bt_gap_set_pin(pin_type, 0, pin_code);
+}
 
-	
+void init_matrix()
+{
 	//configure each GPIO pin to operate as GPIO
-	//gpio_pad_select_gpio(OE);
 	gpio_pad_select_gpio(CLK);
 	gpio_pad_select_gpio(LATCH);
 	gpio_pad_select_gpio(A);
@@ -793,9 +848,8 @@ void app_main()
 	gpio_pad_select_gpio(G1);
 	gpio_pad_select_gpio(G2);
 	
-   //Set each pin as output
-	//gpio_set_direction(OE, GPIO_MODE_OUTPUT);
-   gpio_set_direction(CLK, GPIO_MODE_OUTPUT);
+    //Set each pin as output
+    gpio_set_direction(CLK, GPIO_MODE_OUTPUT);
 	gpio_set_direction(LATCH, GPIO_MODE_OUTPUT);
 	gpio_set_direction(A, GPIO_MODE_OUTPUT);
 	gpio_set_direction(B, GPIO_MODE_OUTPUT);
@@ -816,27 +870,34 @@ void app_main()
 	gpio_set_level(B2, 0);
 	gpio_set_level(G1, 0);
 	gpio_set_level(G2, 0);
-	//for now, set OE as low indefinitely
-	//gpio_set_level(OE, 0);
-	clearMatrix();
-	setHere(2);
-	setHere(0);
-	
-	//disable task watchdog (temporary)
-	esp_task_wdt_deinit();
-	
-	//Task to drive LED Matrix. Tie to core 1 to avoid comm related latencies
-	xTaskCreatePinnedToCore(&blink_task, "blink_task", 4096, NULL, 5, NULL, 1);
 
+	clearMatrix();	
+}
+
+void app_main()
+{	
+	init_pwm();
+	init_i2c();
+	init_bt();
+	init_matrix();
+
+	//Task to drive LED Matrix. Tie to core 1 to avoid comm related latencies
+	xTaskCreatePinnedToCore(&matrix_task, "matrix_task", 4096, NULL, 5, NULL, 1);
+
+	//Creation of a 1 second periodic task
+	TimerHandle_t prdTimer;
+	prdTimer = xTimerCreate("Light_Sensing_Task", 1000/portTICK_PERIOD_MS, pdTRUE, (void *) 1, timerCallback);
+	xTimerStart(prdTimer, 0);
+
+	/* 
+	OLD IDLE TASK CODE
 	//idle task test: Read lux sensor once every second, print to console
 	uint8_t als_MSB;
 	uint8_t als_LSB;
 	uint16_t alsVal;
-	uint32_t luxVal;   
-   
-   ledc_fade_func_install(0);   //install led fadeing duty cycle 
-	
-   while(1)
+	uint32_t luxVal;
+	i2c_cmd_handle_t luxCmd;
+	while(1)
 	{
 		luxCmd = i2c_cmd_link_create();
 		i2c_master_start(luxCmd);	//Start bit
@@ -852,52 +913,27 @@ void app_main()
 		
 		alsVal = (als_MSB << 8) | als_LSB;
 		luxVal = 0.0576 * alsVal;		//Constant retrieved from datasheet to convert ALS to lux
-		printf("ALS Val: %d       Lux Val: %d\n", alsVal, luxVal);
+		//printf("ALS Val: %d       Lux Val: %d\n", alsVal, luxVal);
 		
 		//normal light conditions
-		if(luxVal >= 100 && luxVal < 400)
+		if(luxVal >= 100 && luxVal < 250)
 		{
-			//direct change
-         //ledc_set_duty(LEDC_HIGH_SPEED_MODE, LEDC_CHANNEL_0, (1 << 13) * 0.5);
-			//ledc_update_duty(LEDC_HIGH_SPEED_MODE, LEDC_CHANNEL_0);
-         
-         //change over time
-         ledc_set_fade_with_time(LEDC_HIGH_SPEED_MODE, LEDC_CHANNEL_0, NORMAL_DUTY_CYCLE, FADEDELAY);
-         ledc_fade_start(LEDC_HIGH_SPEED_MODE, LEDC_CHANNEL_0, LEDC_FADE_NO_WAIT);
+			ledc_set_duty(LEDC_HIGH_SPEED_MODE, LEDC_CHANNEL_0, (1 << 13) * 0.5);
+			ledc_update_duty(LEDC_HIGH_SPEED_MODE, LEDC_CHANNEL_0);
 		}
-		//Brightest light conditions
-		else if (luxVal >= 900)
+		//Bright light conditions
+		else if (luxVal >= 250)
 		{
-			//direct change
-         //ledc_set_duty(LEDC_HIGH_SPEED_MODE, LEDC_CHANNEL_0, 0);
-			//ledc_update_duty(LEDC_HIGH_SPEED_MODE, LEDC_CHANNEL_0);
-         
-         //change over time
-         ledc_set_fade_with_time(LEDC_HIGH_SPEED_MODE, LEDC_CHANNEL_0, BRIGHTEST_DUTY_CYCLE, FADEDELAY);
-         ledc_fade_start(LEDC_HIGH_SPEED_MODE, LEDC_CHANNEL_0, LEDC_FADE_NO_WAIT);
-		}
-      //Brighter light conditions
-		else if (luxVal >= 400)
-		{
-			//direct change
-         //ledc_set_duty(LEDC_HIGH_SPEED_MODE, LEDC_CHANNEL_0, (1 << 13) * 0.25);
-			//ledc_update_duty(LEDC_HIGH_SPEED_MODE, LEDC_CHANNEL_0);
-         
-         //change over time
-         ledc_set_fade_with_time(LEDC_HIGH_SPEED_MODE, LEDC_CHANNEL_0, BRIGHTER_DUTY_CYCLE, FADEDELAY);
-         ledc_fade_start(LEDC_HIGH_SPEED_MODE, LEDC_CHANNEL_0, LEDC_FADE_NO_WAIT);
+			ledc_set_duty(LEDC_HIGH_SPEED_MODE, LEDC_CHANNEL_0, 0);
+			ledc_update_duty(LEDC_HIGH_SPEED_MODE, LEDC_CHANNEL_0);
 		}
 		//Low light conditions
 		else
 		{
-			//direct change
-         //ledc_set_duty(LEDC_HIGH_SPEED_MODE, LEDC_CHANNEL_0, (1 << 13) * 0.75);
-			//ledc_update_duty(LEDC_HIGH_SPEED_MODE, LEDC_CHANNEL_0);         
-         
-         //change over time
-         ledc_set_fade_with_time(LEDC_HIGH_SPEED_MODE, LEDC_CHANNEL_0, LOW_DUTY_CYCLE, FADEDELAY);
-         ledc_fade_start(LEDC_HIGH_SPEED_MODE, LEDC_CHANNEL_0, LEDC_FADE_NO_WAIT);
+			ledc_set_duty(LEDC_HIGH_SPEED_MODE, LEDC_CHANNEL_0, (1 << 13) * 0.75);
+			ledc_update_duty(LEDC_HIGH_SPEED_MODE, LEDC_CHANNEL_0);
 		}
 		vTaskDelay(1000/portTICK_PERIOD_MS);
 	}
+	*/
 }
