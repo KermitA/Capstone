@@ -47,6 +47,12 @@
 #define SPP_SERVER_NAME "SPP_SERVER"
 #define EXAMPLE_DEVICE_NAME "Emergency Light Node 1"
 
+#define BRIGHTEST_DUTY_CYCLE 0
+#define BRIGHTER_DUTY_CYCLE (1 << 13) * 0.25
+#define NORMAL_DUTY_CYCLE   (1 << 13) * 0.50
+#define LOW_DUTY_CYCLE      (1 << 13) * 0.75
+#define FADEDELAY 2000
+
 static const esp_spp_mode_t esp_spp_mode = ESP_SPP_MODE_CB;
 
 static struct timeval time_new, time_old;
