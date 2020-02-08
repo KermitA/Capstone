@@ -1,204 +1,204 @@
 src/wpa2/tls/tlsv1_server_write.o: \
- C:/msys32/home/nafis/esp/esp-idf/components/wpa_supplicant/src/wpa2/tls/tlsv1_server_write.c \
- C:/msys32/home/nafis/esp/esp-idf/components/wpa_supplicant/include/wpa/includes.h \
- C:/msys32/home/nafis/esp/esp-idf/components/wpa_supplicant/include/wpa/common.h \
- C:/msys32/home/nafis/esp/esp-idf/components/wpa_supplicant/port/include/os.h \
- C:/msys32/home/nafis/esp/esp-idf/components/esp32/include/esp_types.h \
- C:/msys32/home/nafis/esp/esp-idf/components/newlib/include/sys/cdefs.h \
- C:/msys32/home/nafis/esp/esp-idf/components/newlib/include/machine/_default_types.h \
- C:/msys32/home/nafis/esp/esp-idf/components/newlib/include/sys/features.h \
- C:/msys32/home/nafis/esp/esp-idf/components/newlib/include/stdint.h \
- C:/msys32/home/nafis/esp/esp-idf/components/newlib/include/sys/_intsup.h \
- C:/msys32/home/nafis/esp/esp-idf/components/newlib/include/string.h \
- C:/msys32/home/nafis/esp/esp-idf/components/newlib/include/_ansi.h \
- C:/msys32/home/nafis/esp/esp-idf/components/newlib/include/newlib.h \
- C:/msys32/home/nafis/esp/esp-idf/components/newlib/include/sys/config.h \
- C:/msys32/home/nafis/esp/esp-idf/components/newlib/include/machine/ieeefp.h \
- C:/msys32/home/nafis/esp/esp-idf/components/esp32/include/xtensa/config/core-isa.h \
- C:/msys32/home/nafis/esp/esp-idf/components/newlib/include/sys/reent.h \
- C:/msys32/home/nafis/esp/esp-idf/components/newlib/include/_ansi.h \
- C:/msys32/home/nafis/esp/esp-idf/components/newlib/include/sys/_types.h \
- C:/msys32/home/nafis/esp/esp-idf/components/newlib/include/machine/_types.h \
- C:/msys32/home/nafis/esp/esp-idf/components/newlib/include/sys/lock.h \
- C:/msys32/home/nafis/esp/esp-idf/components/newlib/include/sys/string.h \
- C:/msys32/home/nafis/esp/esp-idf/components/newlib/include/stdio.h \
- C:/msys32/home/nafis/esp/esp-idf/components/newlib/include/sys/types.h \
- C:/msys32/home/nafis/esp/esp-idf/components/newlib/include/machine/types.h \
- C:/msys32/home/nafis/esp/esp-idf/components/newlib/include/sys/sched.h \
- C:/msys32/home/nafis/esp/esp-idf/components/newlib/include/sys/stdio.h \
- C:/msys32/home/nafis/esp/esp-idf/components/newlib/include/stdlib.h \
- C:/msys32/home/nafis/esp/esp-idf/components/newlib/include/machine/stdlib.h \
- C:/msys32/home/nafis/esp/esp-idf/components/newlib/include/alloca.h \
- C:/msys32/home/nafis/esp/esp-idf/components/esp32/include/esp_err.h \
- C:/msys32/home/nafis/esp/esp-idf/components/newlib/platform_include/assert.h \
- C:/capstone/btsample/build/include/sdkconfig.h \
- C:/msys32/home/nafis/esp/esp-idf/components/newlib/include/assert.h \
- C:/msys32/home/nafis/esp/esp-idf/components/esp32/include/rom/ets_sys.h \
- C:/msys32/home/nafis/esp/esp-idf/components/soc/esp32/include/soc/soc.h \
- C:/msys32/home/nafis/esp/esp-idf/components/esp32/include/esp_assert.h \
- C:/msys32/home/nafis/esp/esp-idf/components/newlib/include/machine/endian.h \
- C:/msys32/home/nafis/esp/esp-idf/components/wpa_supplicant/port/include/endian.h \
- C:/msys32/home/nafis/esp/esp-idf/components/wpa_supplicant/port/include/byteswap.h \
- C:/msys32/home/nafis/esp/esp-idf/components/wpa_supplicant/port/include/byteswap.h \
- C:/msys32/home/nafis/esp/esp-idf/components/wpa_supplicant/include/wpa/wpabuf.h \
- C:/msys32/home/nafis/esp/esp-idf/components/wpa_supplicant/include/wpa/wpa_debug.h \
- C:/msys32/home/nafis/esp/esp-idf/components/log/include/esp_log.h \
- C:/msys32/home/nafis/esp/esp-idf/components/log/include/esp_log_internal.h \
- C:/msys32/home/nafis/esp/esp-idf/components/wpa_supplicant/include/crypto/md5.h \
- C:/msys32/home/nafis/esp/esp-idf/components/wpa_supplicant/include/crypto/sha1.h \
- C:/msys32/home/nafis/esp/esp-idf/components/wpa_supplicant/include/crypto/sha256.h \
- C:/msys32/home/nafis/esp/esp-idf/components/wpa_supplicant/include/crypto/random.h \
- C:/msys32/home/nafis/esp/esp-idf/components/wpa_supplicant/include/wpa2/tls/tls.h \
- C:/msys32/home/nafis/esp/esp-idf/components/wpa_supplicant/include/wpa2/tls/x509v3.h \
- C:/msys32/home/nafis/esp/esp-idf/components/wpa_supplicant/include/wpa2/tls/asn1.h \
- C:/msys32/home/nafis/esp/esp-idf/components/wpa_supplicant/include/wpa2/tls/tlsv1_common.h \
- C:/msys32/home/nafis/esp/esp-idf/components/wpa_supplicant/include/crypto/crypto.h \
- C:/msys32/home/nafis/esp/esp-idf/components/wpa_supplicant/include/crypto/common.h \
- C:/msys32/home/nafis/esp/esp-idf/components/wpa_supplicant/include/wpa2/tls/tlsv1_record.h \
- C:/msys32/home/nafis/esp/esp-idf/components/wpa_supplicant/include/wpa2/tls/tlsv1_server.h \
- C:/msys32/home/nafis/esp/esp-idf/components/wpa_supplicant/include/wpa2/tls/tlsv1_cred.h \
- C:/msys32/home/nafis/esp/esp-idf/components/wpa_supplicant/include/wpa2/tls/tlsv1_server_i.h \
- C:/msys32/home/nafis/esp/esp-idf/components/wpa_supplicant/include/wpa2/eap_peer/eap_i.h \
- C:/msys32/home/nafis/esp/esp-idf/components/wpa_supplicant/include/wpa/wpabuf.h \
- C:/msys32/home/nafis/esp/esp-idf/components/wpa_supplicant/include/wpa2/eap_peer/eap.h \
- C:/msys32/home/nafis/esp/esp-idf/components/wpa_supplicant/include/wpa/defs.h \
- C:/msys32/home/nafis/esp/esp-idf/components/wpa_supplicant/include/wpa2/eap_peer/eap_defs.h \
- C:/msys32/home/nafis/esp/esp-idf/components/wpa_supplicant/include/wpa2/eap_peer/eap_common.h \
- C:/msys32/home/nafis/esp/esp-idf/components/wpa_supplicant/include/wpa2/eap_peer/eap_config.h \
- C:/msys32/home/nafis/esp/esp-idf/components/esp32/include/esp_wpa2.h \
- C:/msys32/home/nafis/esp/esp-idf/components/esp32/include/esp_wifi_crypto_types.h
+ C:/esp/esp-mdf/esp-idf/components/wpa_supplicant/src/wpa2/tls/tlsv1_server_write.c \
+ C:/esp/esp-mdf/esp-idf/components/wpa_supplicant/include/wpa/includes.h \
+ C:/esp/esp-mdf/esp-idf/components/wpa_supplicant/include/wpa/common.h \
+ C:/esp/esp-mdf/esp-idf/components/wpa_supplicant/port/include/os.h \
+ C:/esp/esp-mdf/esp-idf/components/esp32/include/esp_types.h \
+ C:/esp/esp-mdf/esp-idf/components/newlib/include/sys/cdefs.h \
+ C:/esp/esp-mdf/esp-idf/components/newlib/include/machine/_default_types.h \
+ C:/esp/esp-mdf/esp-idf/components/newlib/include/sys/features.h \
+ C:/esp/esp-mdf/esp-idf/components/newlib/include/stdint.h \
+ C:/esp/esp-mdf/esp-idf/components/newlib/include/sys/_intsup.h \
+ C:/esp/esp-mdf/esp-idf/components/newlib/include/string.h \
+ C:/esp/esp-mdf/esp-idf/components/newlib/include/_ansi.h \
+ C:/esp/esp-mdf/esp-idf/components/newlib/include/newlib.h \
+ C:/esp/esp-mdf/esp-idf/components/newlib/include/sys/config.h \
+ C:/esp/esp-mdf/esp-idf/components/newlib/include/machine/ieeefp.h \
+ C:/esp/esp-mdf/esp-idf/components/esp32/include/xtensa/config/core-isa.h \
+ C:/esp/esp-mdf/esp-idf/components/newlib/include/sys/reent.h \
+ C:/esp/esp-mdf/esp-idf/components/newlib/include/_ansi.h \
+ C:/esp/esp-mdf/esp-idf/components/newlib/include/sys/_types.h \
+ C:/esp/esp-mdf/esp-idf/components/newlib/include/machine/_types.h \
+ C:/esp/esp-mdf/esp-idf/components/newlib/include/sys/lock.h \
+ C:/esp/esp-mdf/esp-idf/components/newlib/include/sys/string.h \
+ C:/esp/esp-mdf/esp-idf/components/newlib/include/stdio.h \
+ C:/esp/esp-mdf/esp-idf/components/newlib/include/sys/types.h \
+ C:/esp/esp-mdf/esp-idf/components/newlib/include/machine/types.h \
+ C:/esp/esp-mdf/esp-idf/components/newlib/include/sys/sched.h \
+ C:/esp/esp-mdf/esp-idf/components/newlib/include/sys/stdio.h \
+ C:/esp/esp-mdf/esp-idf/components/newlib/include/stdlib.h \
+ C:/esp/esp-mdf/esp-idf/components/newlib/include/machine/stdlib.h \
+ C:/esp/esp-mdf/esp-idf/components/newlib/include/alloca.h \
+ C:/esp/esp-mdf/esp-idf/components/esp32/include/esp_err.h \
+ C:/esp/esp-mdf/esp-idf/components/newlib/platform_include/assert.h \
+ C:/users/micha/documents/seniordesign/projects/btsample/build/include/sdkconfig.h \
+ C:/esp/esp-mdf/esp-idf/components/newlib/include/assert.h \
+ C:/esp/esp-mdf/esp-idf/components/esp32/include/rom/ets_sys.h \
+ C:/esp/esp-mdf/esp-idf/components/soc/esp32/include/soc/soc.h \
+ C:/esp/esp-mdf/esp-idf/components/esp32/include/esp_assert.h \
+ C:/esp/esp-mdf/esp-idf/components/newlib/include/machine/endian.h \
+ C:/esp/esp-mdf/esp-idf/components/wpa_supplicant/port/include/endian.h \
+ C:/esp/esp-mdf/esp-idf/components/wpa_supplicant/port/include/byteswap.h \
+ C:/esp/esp-mdf/esp-idf/components/wpa_supplicant/port/include/byteswap.h \
+ C:/esp/esp-mdf/esp-idf/components/wpa_supplicant/include/wpa/wpabuf.h \
+ C:/esp/esp-mdf/esp-idf/components/wpa_supplicant/include/wpa/wpa_debug.h \
+ C:/esp/esp-mdf/esp-idf/components/log/include/esp_log.h \
+ C:/esp/esp-mdf/esp-idf/components/log/include/esp_log_internal.h \
+ C:/esp/esp-mdf/esp-idf/components/wpa_supplicant/include/crypto/md5.h \
+ C:/esp/esp-mdf/esp-idf/components/wpa_supplicant/include/crypto/sha1.h \
+ C:/esp/esp-mdf/esp-idf/components/wpa_supplicant/include/crypto/sha256.h \
+ C:/esp/esp-mdf/esp-idf/components/wpa_supplicant/include/crypto/random.h \
+ C:/esp/esp-mdf/esp-idf/components/wpa_supplicant/include/wpa2/tls/tls.h \
+ C:/esp/esp-mdf/esp-idf/components/wpa_supplicant/include/wpa2/tls/x509v3.h \
+ C:/esp/esp-mdf/esp-idf/components/wpa_supplicant/include/wpa2/tls/asn1.h \
+ C:/esp/esp-mdf/esp-idf/components/wpa_supplicant/include/wpa2/tls/tlsv1_common.h \
+ C:/esp/esp-mdf/esp-idf/components/wpa_supplicant/include/crypto/crypto.h \
+ C:/esp/esp-mdf/esp-idf/components/wpa_supplicant/include/crypto/common.h \
+ C:/esp/esp-mdf/esp-idf/components/wpa_supplicant/include/wpa2/tls/tlsv1_record.h \
+ C:/esp/esp-mdf/esp-idf/components/wpa_supplicant/include/wpa2/tls/tlsv1_server.h \
+ C:/esp/esp-mdf/esp-idf/components/wpa_supplicant/include/wpa2/tls/tlsv1_cred.h \
+ C:/esp/esp-mdf/esp-idf/components/wpa_supplicant/include/wpa2/tls/tlsv1_server_i.h \
+ C:/esp/esp-mdf/esp-idf/components/wpa_supplicant/include/wpa2/eap_peer/eap_i.h \
+ C:/esp/esp-mdf/esp-idf/components/wpa_supplicant/include/wpa/wpabuf.h \
+ C:/esp/esp-mdf/esp-idf/components/wpa_supplicant/include/wpa2/eap_peer/eap.h \
+ C:/esp/esp-mdf/esp-idf/components/wpa_supplicant/include/wpa/defs.h \
+ C:/esp/esp-mdf/esp-idf/components/wpa_supplicant/include/wpa2/eap_peer/eap_defs.h \
+ C:/esp/esp-mdf/esp-idf/components/wpa_supplicant/include/wpa2/eap_peer/eap_common.h \
+ C:/esp/esp-mdf/esp-idf/components/wpa_supplicant/include/wpa2/eap_peer/eap_config.h \
+ C:/esp/esp-mdf/esp-idf/components/esp32/include/esp_wpa2.h \
+ C:/esp/esp-mdf/esp-idf/components/esp32/include/esp_wifi_crypto_types.h
 
-C:/msys32/home/nafis/esp/esp-idf/components/wpa_supplicant/include/wpa/includes.h:
+C:/esp/esp-mdf/esp-idf/components/wpa_supplicant/include/wpa/includes.h:
 
-C:/msys32/home/nafis/esp/esp-idf/components/wpa_supplicant/include/wpa/common.h:
+C:/esp/esp-mdf/esp-idf/components/wpa_supplicant/include/wpa/common.h:
 
-C:/msys32/home/nafis/esp/esp-idf/components/wpa_supplicant/port/include/os.h:
+C:/esp/esp-mdf/esp-idf/components/wpa_supplicant/port/include/os.h:
 
-C:/msys32/home/nafis/esp/esp-idf/components/esp32/include/esp_types.h:
+C:/esp/esp-mdf/esp-idf/components/esp32/include/esp_types.h:
 
-C:/msys32/home/nafis/esp/esp-idf/components/newlib/include/sys/cdefs.h:
+C:/esp/esp-mdf/esp-idf/components/newlib/include/sys/cdefs.h:
 
-C:/msys32/home/nafis/esp/esp-idf/components/newlib/include/machine/_default_types.h:
+C:/esp/esp-mdf/esp-idf/components/newlib/include/machine/_default_types.h:
 
-C:/msys32/home/nafis/esp/esp-idf/components/newlib/include/sys/features.h:
+C:/esp/esp-mdf/esp-idf/components/newlib/include/sys/features.h:
 
-C:/msys32/home/nafis/esp/esp-idf/components/newlib/include/stdint.h:
+C:/esp/esp-mdf/esp-idf/components/newlib/include/stdint.h:
 
-C:/msys32/home/nafis/esp/esp-idf/components/newlib/include/sys/_intsup.h:
+C:/esp/esp-mdf/esp-idf/components/newlib/include/sys/_intsup.h:
 
-C:/msys32/home/nafis/esp/esp-idf/components/newlib/include/string.h:
+C:/esp/esp-mdf/esp-idf/components/newlib/include/string.h:
 
-C:/msys32/home/nafis/esp/esp-idf/components/newlib/include/_ansi.h:
+C:/esp/esp-mdf/esp-idf/components/newlib/include/_ansi.h:
 
-C:/msys32/home/nafis/esp/esp-idf/components/newlib/include/newlib.h:
+C:/esp/esp-mdf/esp-idf/components/newlib/include/newlib.h:
 
-C:/msys32/home/nafis/esp/esp-idf/components/newlib/include/sys/config.h:
+C:/esp/esp-mdf/esp-idf/components/newlib/include/sys/config.h:
 
-C:/msys32/home/nafis/esp/esp-idf/components/newlib/include/machine/ieeefp.h:
+C:/esp/esp-mdf/esp-idf/components/newlib/include/machine/ieeefp.h:
 
-C:/msys32/home/nafis/esp/esp-idf/components/esp32/include/xtensa/config/core-isa.h:
+C:/esp/esp-mdf/esp-idf/components/esp32/include/xtensa/config/core-isa.h:
 
-C:/msys32/home/nafis/esp/esp-idf/components/newlib/include/sys/reent.h:
+C:/esp/esp-mdf/esp-idf/components/newlib/include/sys/reent.h:
 
-C:/msys32/home/nafis/esp/esp-idf/components/newlib/include/_ansi.h:
+C:/esp/esp-mdf/esp-idf/components/newlib/include/_ansi.h:
 
-C:/msys32/home/nafis/esp/esp-idf/components/newlib/include/sys/_types.h:
+C:/esp/esp-mdf/esp-idf/components/newlib/include/sys/_types.h:
 
-C:/msys32/home/nafis/esp/esp-idf/components/newlib/include/machine/_types.h:
+C:/esp/esp-mdf/esp-idf/components/newlib/include/machine/_types.h:
 
-C:/msys32/home/nafis/esp/esp-idf/components/newlib/include/sys/lock.h:
+C:/esp/esp-mdf/esp-idf/components/newlib/include/sys/lock.h:
 
-C:/msys32/home/nafis/esp/esp-idf/components/newlib/include/sys/string.h:
+C:/esp/esp-mdf/esp-idf/components/newlib/include/sys/string.h:
 
-C:/msys32/home/nafis/esp/esp-idf/components/newlib/include/stdio.h:
+C:/esp/esp-mdf/esp-idf/components/newlib/include/stdio.h:
 
-C:/msys32/home/nafis/esp/esp-idf/components/newlib/include/sys/types.h:
+C:/esp/esp-mdf/esp-idf/components/newlib/include/sys/types.h:
 
-C:/msys32/home/nafis/esp/esp-idf/components/newlib/include/machine/types.h:
+C:/esp/esp-mdf/esp-idf/components/newlib/include/machine/types.h:
 
-C:/msys32/home/nafis/esp/esp-idf/components/newlib/include/sys/sched.h:
+C:/esp/esp-mdf/esp-idf/components/newlib/include/sys/sched.h:
 
-C:/msys32/home/nafis/esp/esp-idf/components/newlib/include/sys/stdio.h:
+C:/esp/esp-mdf/esp-idf/components/newlib/include/sys/stdio.h:
 
-C:/msys32/home/nafis/esp/esp-idf/components/newlib/include/stdlib.h:
+C:/esp/esp-mdf/esp-idf/components/newlib/include/stdlib.h:
 
-C:/msys32/home/nafis/esp/esp-idf/components/newlib/include/machine/stdlib.h:
+C:/esp/esp-mdf/esp-idf/components/newlib/include/machine/stdlib.h:
 
-C:/msys32/home/nafis/esp/esp-idf/components/newlib/include/alloca.h:
+C:/esp/esp-mdf/esp-idf/components/newlib/include/alloca.h:
 
-C:/msys32/home/nafis/esp/esp-idf/components/esp32/include/esp_err.h:
+C:/esp/esp-mdf/esp-idf/components/esp32/include/esp_err.h:
 
-C:/msys32/home/nafis/esp/esp-idf/components/newlib/platform_include/assert.h:
+C:/esp/esp-mdf/esp-idf/components/newlib/platform_include/assert.h:
 
-C:/capstone/btsample/build/include/sdkconfig.h:
+C:/users/micha/documents/seniordesign/projects/btsample/build/include/sdkconfig.h:
 
-C:/msys32/home/nafis/esp/esp-idf/components/newlib/include/assert.h:
+C:/esp/esp-mdf/esp-idf/components/newlib/include/assert.h:
 
-C:/msys32/home/nafis/esp/esp-idf/components/esp32/include/rom/ets_sys.h:
+C:/esp/esp-mdf/esp-idf/components/esp32/include/rom/ets_sys.h:
 
-C:/msys32/home/nafis/esp/esp-idf/components/soc/esp32/include/soc/soc.h:
+C:/esp/esp-mdf/esp-idf/components/soc/esp32/include/soc/soc.h:
 
-C:/msys32/home/nafis/esp/esp-idf/components/esp32/include/esp_assert.h:
+C:/esp/esp-mdf/esp-idf/components/esp32/include/esp_assert.h:
 
-C:/msys32/home/nafis/esp/esp-idf/components/newlib/include/machine/endian.h:
+C:/esp/esp-mdf/esp-idf/components/newlib/include/machine/endian.h:
 
-C:/msys32/home/nafis/esp/esp-idf/components/wpa_supplicant/port/include/endian.h:
+C:/esp/esp-mdf/esp-idf/components/wpa_supplicant/port/include/endian.h:
 
-C:/msys32/home/nafis/esp/esp-idf/components/wpa_supplicant/port/include/byteswap.h:
+C:/esp/esp-mdf/esp-idf/components/wpa_supplicant/port/include/byteswap.h:
 
-C:/msys32/home/nafis/esp/esp-idf/components/wpa_supplicant/port/include/byteswap.h:
+C:/esp/esp-mdf/esp-idf/components/wpa_supplicant/port/include/byteswap.h:
 
-C:/msys32/home/nafis/esp/esp-idf/components/wpa_supplicant/include/wpa/wpabuf.h:
+C:/esp/esp-mdf/esp-idf/components/wpa_supplicant/include/wpa/wpabuf.h:
 
-C:/msys32/home/nafis/esp/esp-idf/components/wpa_supplicant/include/wpa/wpa_debug.h:
+C:/esp/esp-mdf/esp-idf/components/wpa_supplicant/include/wpa/wpa_debug.h:
 
-C:/msys32/home/nafis/esp/esp-idf/components/log/include/esp_log.h:
+C:/esp/esp-mdf/esp-idf/components/log/include/esp_log.h:
 
-C:/msys32/home/nafis/esp/esp-idf/components/log/include/esp_log_internal.h:
+C:/esp/esp-mdf/esp-idf/components/log/include/esp_log_internal.h:
 
-C:/msys32/home/nafis/esp/esp-idf/components/wpa_supplicant/include/crypto/md5.h:
+C:/esp/esp-mdf/esp-idf/components/wpa_supplicant/include/crypto/md5.h:
 
-C:/msys32/home/nafis/esp/esp-idf/components/wpa_supplicant/include/crypto/sha1.h:
+C:/esp/esp-mdf/esp-idf/components/wpa_supplicant/include/crypto/sha1.h:
 
-C:/msys32/home/nafis/esp/esp-idf/components/wpa_supplicant/include/crypto/sha256.h:
+C:/esp/esp-mdf/esp-idf/components/wpa_supplicant/include/crypto/sha256.h:
 
-C:/msys32/home/nafis/esp/esp-idf/components/wpa_supplicant/include/crypto/random.h:
+C:/esp/esp-mdf/esp-idf/components/wpa_supplicant/include/crypto/random.h:
 
-C:/msys32/home/nafis/esp/esp-idf/components/wpa_supplicant/include/wpa2/tls/tls.h:
+C:/esp/esp-mdf/esp-idf/components/wpa_supplicant/include/wpa2/tls/tls.h:
 
-C:/msys32/home/nafis/esp/esp-idf/components/wpa_supplicant/include/wpa2/tls/x509v3.h:
+C:/esp/esp-mdf/esp-idf/components/wpa_supplicant/include/wpa2/tls/x509v3.h:
 
-C:/msys32/home/nafis/esp/esp-idf/components/wpa_supplicant/include/wpa2/tls/asn1.h:
+C:/esp/esp-mdf/esp-idf/components/wpa_supplicant/include/wpa2/tls/asn1.h:
 
-C:/msys32/home/nafis/esp/esp-idf/components/wpa_supplicant/include/wpa2/tls/tlsv1_common.h:
+C:/esp/esp-mdf/esp-idf/components/wpa_supplicant/include/wpa2/tls/tlsv1_common.h:
 
-C:/msys32/home/nafis/esp/esp-idf/components/wpa_supplicant/include/crypto/crypto.h:
+C:/esp/esp-mdf/esp-idf/components/wpa_supplicant/include/crypto/crypto.h:
 
-C:/msys32/home/nafis/esp/esp-idf/components/wpa_supplicant/include/crypto/common.h:
+C:/esp/esp-mdf/esp-idf/components/wpa_supplicant/include/crypto/common.h:
 
-C:/msys32/home/nafis/esp/esp-idf/components/wpa_supplicant/include/wpa2/tls/tlsv1_record.h:
+C:/esp/esp-mdf/esp-idf/components/wpa_supplicant/include/wpa2/tls/tlsv1_record.h:
 
-C:/msys32/home/nafis/esp/esp-idf/components/wpa_supplicant/include/wpa2/tls/tlsv1_server.h:
+C:/esp/esp-mdf/esp-idf/components/wpa_supplicant/include/wpa2/tls/tlsv1_server.h:
 
-C:/msys32/home/nafis/esp/esp-idf/components/wpa_supplicant/include/wpa2/tls/tlsv1_cred.h:
+C:/esp/esp-mdf/esp-idf/components/wpa_supplicant/include/wpa2/tls/tlsv1_cred.h:
 
-C:/msys32/home/nafis/esp/esp-idf/components/wpa_supplicant/include/wpa2/tls/tlsv1_server_i.h:
+C:/esp/esp-mdf/esp-idf/components/wpa_supplicant/include/wpa2/tls/tlsv1_server_i.h:
 
-C:/msys32/home/nafis/esp/esp-idf/components/wpa_supplicant/include/wpa2/eap_peer/eap_i.h:
+C:/esp/esp-mdf/esp-idf/components/wpa_supplicant/include/wpa2/eap_peer/eap_i.h:
 
-C:/msys32/home/nafis/esp/esp-idf/components/wpa_supplicant/include/wpa/wpabuf.h:
+C:/esp/esp-mdf/esp-idf/components/wpa_supplicant/include/wpa/wpabuf.h:
 
-C:/msys32/home/nafis/esp/esp-idf/components/wpa_supplicant/include/wpa2/eap_peer/eap.h:
+C:/esp/esp-mdf/esp-idf/components/wpa_supplicant/include/wpa2/eap_peer/eap.h:
 
-C:/msys32/home/nafis/esp/esp-idf/components/wpa_supplicant/include/wpa/defs.h:
+C:/esp/esp-mdf/esp-idf/components/wpa_supplicant/include/wpa/defs.h:
 
-C:/msys32/home/nafis/esp/esp-idf/components/wpa_supplicant/include/wpa2/eap_peer/eap_defs.h:
+C:/esp/esp-mdf/esp-idf/components/wpa_supplicant/include/wpa2/eap_peer/eap_defs.h:
 
-C:/msys32/home/nafis/esp/esp-idf/components/wpa_supplicant/include/wpa2/eap_peer/eap_common.h:
+C:/esp/esp-mdf/esp-idf/components/wpa_supplicant/include/wpa2/eap_peer/eap_common.h:
 
-C:/msys32/home/nafis/esp/esp-idf/components/wpa_supplicant/include/wpa2/eap_peer/eap_config.h:
+C:/esp/esp-mdf/esp-idf/components/wpa_supplicant/include/wpa2/eap_peer/eap_config.h:
 
-C:/msys32/home/nafis/esp/esp-idf/components/esp32/include/esp_wpa2.h:
+C:/esp/esp-mdf/esp-idf/components/esp32/include/esp_wpa2.h:
 
-C:/msys32/home/nafis/esp/esp-idf/components/esp32/include/esp_wifi_crypto_types.h:
-/home/nafis/esp/esp-idf/components/wpa_supplicant/src/wpa2/tls/tlsv1_server_write.c:
+C:/esp/esp-mdf/esp-idf/components/esp32/include/esp_wifi_crypto_types.h:
+/c/esp/esp-mdf/esp-idf/components/wpa_supplicant/src/wpa2/tls/tlsv1_server_write.c:

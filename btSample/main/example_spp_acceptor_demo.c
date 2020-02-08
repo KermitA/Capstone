@@ -25,10 +25,6 @@
 #define I2CSCL 19
 #define LUX_SENSOR_ADDR 0x10
 
-#define TESTPIN 23
-#define DUTY50 4095
-#define DUTY0 0
-
 #define R1 12
 #define B1 13
 #define R2 32
@@ -646,35 +642,43 @@ void timerCallback(TimerHandle_t pxTimer)
 	
 	alsVal = (als_MSB << 8) | als_LSB;
 	luxVal = 0.0576 * alsVal;		//Constant retrieved from datasheet to convert ALS to lux
-	printf("ALS Val: %d       Lux Val: %d\n", alsVal, luxVal);
+	//printf("ALS Val: %d       Lux Val: %d\n", alsVal, luxVal);
 	
 	//normal light conditions
 	if(luxVal >= 100 && luxVal < 400)
 	{
 		//change over time
-		ledc_set_fade_with_time(LEDC_HIGH_SPEED_MODE, LEDC_CHANNEL_0, NORMAL_DUTY_CYCLE, FADEDELAY);
-		ledc_fade_start(LEDC_HIGH_SPEED_MODE, LEDC_CHANNEL_0, LEDC_FADE_NO_WAIT);
+		ledc_set_fade_time_and_start(LEDC_HIGH_SPEED_MODE, LEDC_CHANNEL_0,
+				NORMAL_DUTY_CYCLE, FADEDELAY, LEDC_FADE_NO_WAIT);
+		//ledc_set_fade_with_time(LEDC_HIGH_SPEED_MODE, LEDC_CHANNEL_0, NORMAL_DUTY_CYCLE, FADEDELAY);
+		//ledc_fade_start(LEDC_HIGH_SPEED_MODE, LEDC_CHANNEL_0, LEDC_FADE_NO_WAIT);
 	}
 	//Brightest light conditions
 	else if (luxVal >= 900)
 	{
 		//change over time
-		ledc_set_fade_with_time(LEDC_HIGH_SPEED_MODE, LEDC_CHANNEL_0, BRIGHTEST_DUTY_CYCLE, FADEDELAY);
-		ledc_fade_start(LEDC_HIGH_SPEED_MODE, LEDC_CHANNEL_0, LEDC_FADE_NO_WAIT);
+		ledc_set_fade_time_and_start(LEDC_HIGH_SPEED_MODE, LEDC_CHANNEL_0,
+				BRIGHTEST_DUTY_CYCLE, FADEDELAY, LEDC_FADE_NO_WAIT);
+		//ledc_set_fade_with_time(LEDC_HIGH_SPEED_MODE, LEDC_CHANNEL_0, BRIGHTEST_DUTY_CYCLE, FADEDELAY);
+		//ledc_fade_start(LEDC_HIGH_SPEED_MODE, LEDC_CHANNEL_0, LEDC_FADE_NO_WAIT);
 	}
     //Brighter light conditions
 	else if (luxVal >= 400)
 	{
 		//change over time
-		ledc_set_fade_with_time(LEDC_HIGH_SPEED_MODE, LEDC_CHANNEL_0, BRIGHTER_DUTY_CYCLE, FADEDELAY);
-		ledc_fade_start(LEDC_HIGH_SPEED_MODE, LEDC_CHANNEL_0, LEDC_FADE_NO_WAIT);
+		ledc_set_fade_time_and_start(LEDC_HIGH_SPEED_MODE, LEDC_CHANNEL_0,
+				BRIGHTER_DUTY_CYCLE, FADEDELAY, LEDC_FADE_NO_WAIT);
+		//ledc_set_fade_with_time(LEDC_HIGH_SPEED_MODE, LEDC_CHANNEL_0, BRIGHTER_DUTY_CYCLE, FADEDELAY);
+		//ledc_fade_start(LEDC_HIGH_SPEED_MODE, LEDC_CHANNEL_0, LEDC_FADE_NO_WAIT);
 	}
 	//Low light conditions
 	else
 	{
 		//change over time
-		ledc_set_fade_with_time(LEDC_HIGH_SPEED_MODE, LEDC_CHANNEL_0, LOW_DUTY_CYCLE, FADEDELAY);
-		ledc_fade_start(LEDC_HIGH_SPEED_MODE, LEDC_CHANNEL_0, LEDC_FADE_NO_WAIT);
+		ledc_set_fade_time_and_start(LEDC_HIGH_SPEED_MODE, LEDC_CHANNEL_0,
+				LOW_DUTY_CYCLE, FADEDELAY, LEDC_FADE_NO_WAIT);
+		//ledc_set_fade_with_time(LEDC_HIGH_SPEED_MODE, LEDC_CHANNEL_0, LOW_DUTY_CYCLE, FADEDELAY);
+		//ledc_fade_start(LEDC_HIGH_SPEED_MODE, LEDC_CHANNEL_0, LEDC_FADE_NO_WAIT);
 	}
 }
 
@@ -895,6 +899,7 @@ void app_main()
 	prdTimer = xTimerCreate("Light_Sensing_Task", 1000/portTICK_PERIOD_MS, pdTRUE, (void *) 1, timerCallback);
 	xTimerStart(prdTimer, 0);
 
+	setRight(1);
 	/* 
 	OLD IDLE TASK CODE
 	//idle task test: Read lux sensor once every second, print to console

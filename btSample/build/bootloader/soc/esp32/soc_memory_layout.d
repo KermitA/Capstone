@@ -1,3 +1,3 @@
 esp32/soc_memory_layout.o: \
- C:/msys32/home/nafis/esp/esp-idf/components/soc/esp32/soc_memory_layout.c
-/home/nafis/esp/esp-idf/components/soc/esp32/soc_memory_layout.c:
+ C:/esp/esp-mdf/esp-idf/components/soc/esp32/soc_memory_layout.c
+/c/esp/esp-mdf/esp-idf/components/soc/esp32/soc_memory_layout.c:

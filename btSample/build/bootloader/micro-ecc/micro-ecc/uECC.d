@@ -1,18 +1,18 @@
 micro-ecc/uECC.o: \
- C:/msys32/home/nafis/esp/esp-idf/components/micro-ecc/micro-ecc/uECC.c \
- C:/msys32/home/nafis/esp/esp-idf/components/micro-ecc/micro-ecc/uECC.h \
- C:/msys32/home/nafis/esp/esp-idf/components/micro-ecc/micro-ecc/uECC_vli.h \
- C:/msys32/home/nafis/esp/esp-idf/components/micro-ecc/micro-ecc/types.h \
- C:/msys32/home/nafis/esp/esp-idf/components/micro-ecc/micro-ecc/platform-specific.inc \
- C:/msys32/home/nafis/esp/esp-idf/components/micro-ecc/micro-ecc/curve-specific.inc
+ C:/esp/esp-mdf/esp-idf/components/micro-ecc/micro-ecc/uECC.c \
+ C:/esp/esp-mdf/esp-idf/components/micro-ecc/micro-ecc/uECC.h \
+ C:/esp/esp-mdf/esp-idf/components/micro-ecc/micro-ecc/uECC_vli.h \
+ C:/esp/esp-mdf/esp-idf/components/micro-ecc/micro-ecc/types.h \
+ C:/esp/esp-mdf/esp-idf/components/micro-ecc/micro-ecc/platform-specific.inc \
+ C:/esp/esp-mdf/esp-idf/components/micro-ecc/micro-ecc/curve-specific.inc
 
-C:/msys32/home/nafis/esp/esp-idf/components/micro-ecc/micro-ecc/uECC.h:
+C:/esp/esp-mdf/esp-idf/components/micro-ecc/micro-ecc/uECC.h:
 
-C:/msys32/home/nafis/esp/esp-idf/components/micro-ecc/micro-ecc/uECC_vli.h:
+C:/esp/esp-mdf/esp-idf/components/micro-ecc/micro-ecc/uECC_vli.h:
 
-C:/msys32/home/nafis/esp/esp-idf/components/micro-ecc/micro-ecc/types.h:
+C:/esp/esp-mdf/esp-idf/components/micro-ecc/micro-ecc/types.h:
 
-C:/msys32/home/nafis/esp/esp-idf/components/micro-ecc/micro-ecc/platform-specific.inc:
+C:/esp/esp-mdf/esp-idf/components/micro-ecc/micro-ecc/platform-specific.inc:
 
-C:/msys32/home/nafis/esp/esp-idf/components/micro-ecc/micro-ecc/curve-specific.inc:
-/home/nafis/esp/esp-idf/components/micro-ecc/micro-ecc/uECC.c:
+C:/esp/esp-mdf/esp-idf/components/micro-ecc/micro-ecc/curve-specific.inc:
+/c/esp/esp-mdf/esp-idf/components/micro-ecc/micro-ecc/uECC.c:

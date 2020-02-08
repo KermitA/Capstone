@@ -1,102 +1,101 @@
-esp32/cpu_util.o: \
- C:/msys32/home/nafis/esp/esp-idf/components/soc/esp32/cpu_util.c \
- C:/msys32/home/nafis/esp/esp-idf/components/esp32/include/esp_attr.h \
- C:/capstone/btsample/build/include/sdkconfig.h \
- C:/msys32/home/nafis/esp/esp-idf/components/soc/esp32/include/soc/cpu.h \
- C:/msys32/home/nafis/esp/esp-idf/components/newlib/include/stdint.h \
- C:/msys32/home/nafis/esp/esp-idf/components/newlib/include/machine/_default_types.h \
- C:/msys32/home/nafis/esp/esp-idf/components/newlib/include/sys/features.h \
- C:/msys32/home/nafis/esp/esp-idf/components/newlib/include/sys/_intsup.h \
- C:/msys32/home/nafis/esp/esp-idf/components/esp32/include/xtensa/corebits.h \
- C:/msys32/home/nafis/esp/esp-idf/components/esp32/include/xtensa/config/core.h \
- C:/msys32/home/nafis/esp/esp-idf/components/esp32/include/xtensa/hal.h \
- C:/msys32/home/nafis/esp/esp-idf/components/esp32/include/xtensa/xtensa-versions.h \
- C:/msys32/home/nafis/esp/esp-idf/components/esp32/include/xtensa/config/core-isa.h \
- C:/msys32/home/nafis/esp/esp-idf/components/esp32/include/xtensa/config/core-matmap.h \
- C:/msys32/home/nafis/esp/esp-idf/components/esp32/include/xtensa/config/tie.h \
- C:/msys32/home/nafis/esp/esp-idf/components/soc/esp32/include/soc/soc.h \
- C:/msys32/home/nafis/esp/esp-idf/components/esp32/include/esp_assert.h \
- C:/msys32/home/nafis/esp/esp-idf/components/newlib/platform_include/assert.h \
- C:/msys32/home/nafis/esp/esp-idf/components/newlib/include/stdlib.h \
- C:/msys32/home/nafis/esp/esp-idf/components/newlib/include/machine/ieeefp.h \
- C:/msys32/home/nafis/esp/esp-idf/components/newlib/include/_ansi.h \
- C:/msys32/home/nafis/esp/esp-idf/components/newlib/include/newlib.h \
- C:/msys32/home/nafis/esp/esp-idf/components/newlib/include/sys/config.h \
- C:/msys32/home/nafis/esp/esp-idf/components/newlib/include/sys/reent.h \
- C:/msys32/home/nafis/esp/esp-idf/components/newlib/include/_ansi.h \
- C:/msys32/home/nafis/esp/esp-idf/components/newlib/include/sys/_types.h \
- C:/msys32/home/nafis/esp/esp-idf/components/newlib/include/machine/_types.h \
- C:/msys32/home/nafis/esp/esp-idf/components/newlib/include/sys/lock.h \
- C:/msys32/home/nafis/esp/esp-idf/components/newlib/include/sys/cdefs.h \
- C:/msys32/home/nafis/esp/esp-idf/components/newlib/include/machine/stdlib.h \
- C:/msys32/home/nafis/esp/esp-idf/components/newlib/include/alloca.h \
- C:/msys32/home/nafis/esp/esp-idf/components/newlib/include/assert.h \
- C:/msys32/home/nafis/esp/esp-idf/components/soc/esp32/include/soc/rtc_cntl_reg.h \
- C:/msys32/home/nafis/esp/esp-idf/components/soc/esp32/include/soc/soc.h
+esp32/cpu_util.o: C:/esp/esp-mdf/esp-idf/components/soc/esp32/cpu_util.c \
+ C:/esp/esp-mdf/esp-idf/components/esp32/include/esp_attr.h \
+ C:/esp/esp-mdf/esp-idf/components/soc/esp32/include/soc/cpu.h \
+ C:/esp/esp-mdf/esp-idf/components/newlib/include/stdint.h \
+ C:/esp/esp-mdf/esp-idf/components/newlib/include/machine/_default_types.h \
+ C:/esp/esp-mdf/esp-idf/components/newlib/include/sys/features.h \
+ C:/esp/esp-mdf/esp-idf/components/newlib/include/sys/_intsup.h \
+ C:/esp/esp-mdf/esp-idf/components/esp32/include/xtensa/corebits.h \
+ C:/esp/esp-mdf/esp-idf/components/esp32/include/xtensa/config/core.h \
+ C:/esp/esp-mdf/esp-idf/components/esp32/include/xtensa/hal.h \
+ C:/esp/esp-mdf/esp-idf/components/esp32/include/xtensa/xtensa-versions.h \
+ C:/esp/esp-mdf/esp-idf/components/esp32/include/xtensa/config/core-isa.h \
+ C:/esp/esp-mdf/esp-idf/components/esp32/include/xtensa/config/core-matmap.h \
+ C:/esp/esp-mdf/esp-idf/components/esp32/include/xtensa/config/tie.h \
+ C:/esp/esp-mdf/esp-idf/components/soc/esp32/include/soc/soc.h \
+ C:/esp/esp-mdf/esp-idf/components/esp32/include/esp_assert.h \
+ C:/esp/esp-mdf/esp-idf/components/newlib/platform_include/assert.h \
+ C:/users/micha/documents/seniordesign/projects/btsample/build/include/sdkconfig.h \
+ C:/esp/esp-mdf/esp-idf/components/newlib/include/stdlib.h \
+ C:/esp/esp-mdf/esp-idf/components/newlib/include/machine/ieeefp.h \
+ C:/esp/esp-mdf/esp-idf/components/newlib/include/_ansi.h \
+ C:/esp/esp-mdf/esp-idf/components/newlib/include/newlib.h \
+ C:/esp/esp-mdf/esp-idf/components/newlib/include/sys/config.h \
+ C:/esp/esp-mdf/esp-idf/components/newlib/include/sys/reent.h \
+ C:/esp/esp-mdf/esp-idf/components/newlib/include/_ansi.h \
+ C:/esp/esp-mdf/esp-idf/components/newlib/include/sys/_types.h \
+ C:/esp/esp-mdf/esp-idf/components/newlib/include/machine/_types.h \
+ C:/esp/esp-mdf/esp-idf/components/newlib/include/sys/lock.h \
+ C:/esp/esp-mdf/esp-idf/components/newlib/include/sys/cdefs.h \
+ C:/esp/esp-mdf/esp-idf/components/newlib/include/machine/stdlib.h \
+ C:/esp/esp-mdf/esp-idf/components/newlib/include/alloca.h \
+ C:/esp/esp-mdf/esp-idf/components/newlib/include/assert.h \
+ C:/esp/esp-mdf/esp-idf/components/soc/esp32/include/soc/rtc_cntl_reg.h \
+ C:/esp/esp-mdf/esp-idf/components/soc/esp32/include/soc/soc.h
 
-C:/msys32/home/nafis/esp/esp-idf/components/esp32/include/esp_attr.h:
+C:/esp/esp-mdf/esp-idf/components/esp32/include/esp_attr.h:
 
-C:/capstone/btsample/build/include/sdkconfig.h:
+C:/esp/esp-mdf/esp-idf/components/soc/esp32/include/soc/cpu.h:
 
-C:/msys32/home/nafis/esp/esp-idf/components/soc/esp32/include/soc/cpu.h:
+C:/esp/esp-mdf/esp-idf/components/newlib/include/stdint.h:
 
-C:/msys32/home/nafis/esp/esp-idf/components/newlib/include/stdint.h:
+C:/esp/esp-mdf/esp-idf/components/newlib/include/machine/_default_types.h:
 
-C:/msys32/home/nafis/esp/esp-idf/components/newlib/include/machine/_default_types.h:
+C:/esp/esp-mdf/esp-idf/components/newlib/include/sys/features.h:
 
-C:/msys32/home/nafis/esp/esp-idf/components/newlib/include/sys/features.h:
+C:/esp/esp-mdf/esp-idf/components/newlib/include/sys/_intsup.h:
 
-C:/msys32/home/nafis/esp/esp-idf/components/newlib/include/sys/_intsup.h:
+C:/esp/esp-mdf/esp-idf/components/esp32/include/xtensa/corebits.h:
 
-C:/msys32/home/nafis/esp/esp-idf/components/esp32/include/xtensa/corebits.h:
+C:/esp/esp-mdf/esp-idf/components/esp32/include/xtensa/config/core.h:
 
-C:/msys32/home/nafis/esp/esp-idf/components/esp32/include/xtensa/config/core.h:
+C:/esp/esp-mdf/esp-idf/components/esp32/include/xtensa/hal.h:
 
-C:/msys32/home/nafis/esp/esp-idf/components/esp32/include/xtensa/hal.h:
+C:/esp/esp-mdf/esp-idf/components/esp32/include/xtensa/xtensa-versions.h:
 
-C:/msys32/home/nafis/esp/esp-idf/components/esp32/include/xtensa/xtensa-versions.h:
+C:/esp/esp-mdf/esp-idf/components/esp32/include/xtensa/config/core-isa.h:
 
-C:/msys32/home/nafis/esp/esp-idf/components/esp32/include/xtensa/config/core-isa.h:
+C:/esp/esp-mdf/esp-idf/components/esp32/include/xtensa/config/core-matmap.h:
 
-C:/msys32/home/nafis/esp/esp-idf/components/esp32/include/xtensa/config/core-matmap.h:
+C:/esp/esp-mdf/esp-idf/components/esp32/include/xtensa/config/tie.h:
 
-C:/msys32/home/nafis/esp/esp-idf/components/esp32/include/xtensa/config/tie.h:
+C:/esp/esp-mdf/esp-idf/components/soc/esp32/include/soc/soc.h:
 
-C:/msys32/home/nafis/esp/esp-idf/components/soc/esp32/include/soc/soc.h:
+C:/esp/esp-mdf/esp-idf/components/esp32/include/esp_assert.h:
 
-C:/msys32/home/nafis/esp/esp-idf/components/esp32/include/esp_assert.h:
+C:/esp/esp-mdf/esp-idf/components/newlib/platform_include/assert.h:
 
-C:/msys32/home/nafis/esp/esp-idf/components/newlib/platform_include/assert.h:
+C:/users/micha/documents/seniordesign/projects/btsample/build/include/sdkconfig.h:
 
-C:/msys32/home/nafis/esp/esp-idf/components/newlib/include/stdlib.h:
+C:/esp/esp-mdf/esp-idf/components/newlib/include/stdlib.h:
 
-C:/msys32/home/nafis/esp/esp-idf/components/newlib/include/machine/ieeefp.h:
+C:/esp/esp-mdf/esp-idf/components/newlib/include/machine/ieeefp.h:
 
-C:/msys32/home/nafis/esp/esp-idf/components/newlib/include/_ansi.h:
+C:/esp/esp-mdf/esp-idf/components/newlib/include/_ansi.h:
 
-C:/msys32/home/nafis/esp/esp-idf/components/newlib/include/newlib.h:
+C:/esp/esp-mdf/esp-idf/components/newlib/include/newlib.h:
 
-C:/msys32/home/nafis/esp/esp-idf/components/newlib/include/sys/config.h:
+C:/esp/esp-mdf/esp-idf/components/newlib/include/sys/config.h:
 
-C:/msys32/home/nafis/esp/esp-idf/components/newlib/include/sys/reent.h:
+C:/esp/esp-mdf/esp-idf/components/newlib/include/sys/reent.h:
 
-C:/msys32/home/nafis/esp/esp-idf/components/newlib/include/_ansi.h:
+C:/esp/esp-mdf/esp-idf/components/newlib/include/_ansi.h:
 
-C:/msys32/home/nafis/esp/esp-idf/components/newlib/include/sys/_types.h:
+C:/esp/esp-mdf/esp-idf/components/newlib/include/sys/_types.h:
 
-C:/msys32/home/nafis/esp/esp-idf/components/newlib/include/machine/_types.h:
+C:/esp/esp-mdf/esp-idf/components/newlib/include/machine/_types.h:
 
-C:/msys32/home/nafis/esp/esp-idf/components/newlib/include/sys/lock.h:
+C:/esp/esp-mdf/esp-idf/components/newlib/include/sys/lock.h:
 
-C:/msys32/home/nafis/esp/esp-idf/components/newlib/include/sys/cdefs.h:
+C:/esp/esp-mdf/esp-idf/components/newlib/include/sys/cdefs.h:
 
-C:/msys32/home/nafis/esp/esp-idf/components/newlib/include/machine/stdlib.h:
+C:/esp/esp-mdf/esp-idf/components/newlib/include/machine/stdlib.h:
 
-C:/msys32/home/nafis/esp/esp-idf/components/newlib/include/alloca.h:
+C:/esp/esp-mdf/esp-idf/components/newlib/include/alloca.h:
 
-C:/msys32/home/nafis/esp/esp-idf/components/newlib/include/assert.h:
+C:/esp/esp-mdf/esp-idf/components/newlib/include/assert.h:
 
-C:/msys32/home/nafis/esp/esp-idf/components/soc/esp32/include/soc/rtc_cntl_reg.h:
+C:/esp/esp-mdf/esp-idf/components/soc/esp32/include/soc/rtc_cntl_reg.h:
 
-C:/msys32/home/nafis/esp/esp-idf/components/soc/esp32/include/soc/soc.h:
-/home/nafis/esp/esp-idf/components/soc/esp32/cpu_util.c:
+C:/esp/esp-mdf/esp-idf/components/soc/esp32/include/soc/soc.h:
+/c/esp/esp-mdf/esp-idf/components/soc/esp32/cpu_util.c:

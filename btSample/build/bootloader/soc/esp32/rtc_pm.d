@@ -1,18 +1,17 @@
-esp32/rtc_pm.o: \
- C:/msys32/home/nafis/esp/esp-idf/components/soc/esp32/rtc_pm.c \
- C:/msys32/home/nafis/esp/esp-idf/components/soc/esp32/include/soc/rtc.h \
- C:/msys32/home/nafis/esp/esp-idf/components/soc/esp32/include/soc/soc.h \
- C:/msys32/home/nafis/esp/esp-idf/components/esp32/include/esp_assert.h \
- C:/msys32/home/nafis/esp/esp-idf/components/soc/esp32/include/soc/rtc_cntl_reg.h \
- C:/msys32/home/nafis/esp/esp-idf/components/soc/esp32/include/soc/soc.h
+esp32/rtc_pm.o: C:/esp/esp-mdf/esp-idf/components/soc/esp32/rtc_pm.c \
+ C:/esp/esp-mdf/esp-idf/components/soc/esp32/include/soc/rtc.h \
+ C:/esp/esp-mdf/esp-idf/components/soc/esp32/include/soc/soc.h \
+ C:/esp/esp-mdf/esp-idf/components/esp32/include/esp_assert.h \
+ C:/esp/esp-mdf/esp-idf/components/soc/esp32/include/soc/rtc_cntl_reg.h \
+ C:/esp/esp-mdf/esp-idf/components/soc/esp32/include/soc/soc.h
 
-C:/msys32/home/nafis/esp/esp-idf/components/soc/esp32/include/soc/rtc.h:
+C:/esp/esp-mdf/esp-idf/components/soc/esp32/include/soc/rtc.h:
 
-C:/msys32/home/nafis/esp/esp-idf/components/soc/esp32/include/soc/soc.h:
+C:/esp/esp-mdf/esp-idf/components/soc/esp32/include/soc/soc.h:
 
-C:/msys32/home/nafis/esp/esp-idf/components/esp32/include/esp_assert.h:
+C:/esp/esp-mdf/esp-idf/components/esp32/include/esp_assert.h:
 
-C:/msys32/home/nafis/esp/esp-idf/components/soc/esp32/include/soc/rtc_cntl_reg.h:
+C:/esp/esp-mdf/esp-idf/components/soc/esp32/include/soc/rtc_cntl_reg.h:
 
-C:/msys32/home/nafis/esp/esp-idf/components/soc/esp32/include/soc/soc.h:
-/home/nafis/esp/esp-idf/components/soc/esp32/rtc_pm.c:
+C:/esp/esp-mdf/esp-idf/components/soc/esp32/include/soc/soc.h:
+/c/esp/esp-mdf/esp-idf/components/soc/esp32/rtc_pm.c:

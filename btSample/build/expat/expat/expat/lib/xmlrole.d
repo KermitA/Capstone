@@ -1,21 +1,21 @@
 expat/expat/lib/xmlrole.o: \
- C:/msys32/home/nafis/esp/esp-idf/components/expat/expat/expat/lib/xmlrole.c \
- C:/msys32/home/nafis/esp/esp-idf/components/expat/port/include/expat_config.h \
- C:/msys32/home/nafis/esp/esp-idf/components/expat/expat/expat/lib/expat_external.h \
- C:/msys32/home/nafis/esp/esp-idf/components/expat/expat/expat/lib/internal.h \
- C:/msys32/home/nafis/esp/esp-idf/components/expat/expat/expat/lib/xmlrole.h \
- C:/msys32/home/nafis/esp/esp-idf/components/expat/expat/expat/lib/xmltok.h \
- C:/msys32/home/nafis/esp/esp-idf/components/expat/expat/expat/lib/ascii.h
+ C:/esp/esp-mdf/esp-idf/components/expat/expat/expat/lib/xmlrole.c \
+ C:/esp/esp-mdf/esp-idf/components/expat/port/include/expat_config.h \
+ C:/esp/esp-mdf/esp-idf/components/expat/expat/expat/lib/expat_external.h \
+ C:/esp/esp-mdf/esp-idf/components/expat/expat/expat/lib/internal.h \
+ C:/esp/esp-mdf/esp-idf/components/expat/expat/expat/lib/xmlrole.h \
+ C:/esp/esp-mdf/esp-idf/components/expat/expat/expat/lib/xmltok.h \
+ C:/esp/esp-mdf/esp-idf/components/expat/expat/expat/lib/ascii.h
 
-C:/msys32/home/nafis/esp/esp-idf/components/expat/port/include/expat_config.h:
+C:/esp/esp-mdf/esp-idf/components/expat/port/include/expat_config.h:
 
-C:/msys32/home/nafis/esp/esp-idf/components/expat/expat/expat/lib/expat_external.h:
+C:/esp/esp-mdf/esp-idf/components/expat/expat/expat/lib/expat_external.h:
 
-C:/msys32/home/nafis/esp/esp-idf/components/expat/expat/expat/lib/internal.h:
+C:/esp/esp-mdf/esp-idf/components/expat/expat/expat/lib/internal.h:
 
-C:/msys32/home/nafis/esp/esp-idf/components/expat/expat/expat/lib/xmlrole.h:
+C:/esp/esp-mdf/esp-idf/components/expat/expat/expat/lib/xmlrole.h:
 
-C:/msys32/home/nafis/esp/esp-idf/components/expat/expat/expat/lib/xmltok.h:
+C:/esp/esp-mdf/esp-idf/components/expat/expat/expat/lib/xmltok.h:
 
-C:/msys32/home/nafis/esp/esp-idf/components/expat/expat/expat/lib/ascii.h:
-/home/nafis/esp/esp-idf/components/expat/expat/expat/lib/xmlrole.c:
+C:/esp/esp-mdf/esp-idf/components/expat/expat/expat/lib/ascii.h:
+/c/esp/esp-mdf/esp-idf/components/expat/expat/expat/lib/xmlrole.c:

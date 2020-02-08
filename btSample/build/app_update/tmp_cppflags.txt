@@ -1,1 +1,0 @@
-186ac15-dirty bt_spp_acceptor_demo v3.3.1-dirty

@@ -1,3 +1,3 @@
 bluedroid/btc/core/btc_sec.o: \
- C:/msys32/home/nafis/esp/esp-idf/components/bt/bluedroid/btc/core/btc_sec.c
-/home/nafis/esp/esp-idf/components/bt/bluedroid/btc/core/btc_sec.c:
+ C:/esp/esp-mdf/esp-idf/components/bt/bluedroid/btc/core/btc_sec.c
+/c/esp/esp-mdf/esp-idf/components/bt/bluedroid/btc/core/btc_sec.c:
