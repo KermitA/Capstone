@@ -4,10 +4,12 @@
 #include "esp_gap_bt_api.h"
 #include "esp_bt_device.h"
 #include "esp_spp_api.h"
+#include "driver/i2c.h"
+#include "driver/ledc.h"
 
 #define SPP_TAG "SPP_ACCEPTOR_DEMO"
 #define SPP_SERVER_NAME "SPP_SERVER"
-#define EXAMPLE_DEVICE_NAME "Emergency Light Node 1"
+#define EXAMPLE_DEVICE_NAME "Emergency Light Node 3"	//2 for root
 
 #include "mdf_common.h"
 #include "mwifi.h"
@@ -17,19 +19,24 @@
 #define SELECT_ROOT 0
 
 //LED Matrix Pin Definitions
-#define R1 12
-#define B1 13
-#define R2 32
-#define B2 33
-#define A 25
-#define C 26
-#define CLK 27
-#define OE 14
-#define G1 5
-#define G2 17
-#define B 16
+//new pin numbers defined. Comments have old pin numbers
+#define R1 32  //12
+#define B1 33  //13
+#define R2 25  //32
+#define B2 26  //33
+#define A 27  //25
+#define C 14  //26
+#define CLK 12  //27
+#define OE 13  //14
+#define G1 21  //5
+#define G2 18  //17
+#define B 17  //16
 #define LATCH 4
 
+//I2C definitions
+#define I2CSDA 22 //18 
+#define I2CSCL 23 //19
+#define LUX_SENSOR_ADDR 0x10
 
 //Message type definitions
 #define GET_MSG 0
@@ -55,6 +62,13 @@
 
 // #define MEMORY_DEBUG
 #define BUF_SIZE 512
+
+//PWM cfg
+#define BRIGHTEST_DUTY_CYCLE 0
+#define BRIGHTER_DUTY_CYCLE (1 << 13) * 0.25
+#define NORMAL_DUTY_CYCLE   (1 << 13) * 0.50
+#define LOW_DUTY_CYCLE      (1 << 13) * 0.75
+#define FADEDELAY 2000
 
 //For testing, can be deleted soon
 char* root_mac = "c4:4f:33:3e:c7:ea";
@@ -95,11 +109,21 @@ void parsePacket(cJSON *);
 */
 void bt_read_and_send(char *data)
 {
+
+	printf("from bt_read_and_send: %s\n", data);
 	//first parse to JSON
 	cJSON *root = cJSON_Parse(data);
 	
 	//grab the MAC
 	cJSON * msgMac = cJSON_GetObjectItem(root, "dest");
+	printf("mac address from data: %s\n", msgMac->valuestring);
+	printf("looking for ");
+	int k;
+	for (k = 0; k < MWIFI_ADDR_LEN; k++)
+	{
+		printf("%x", sta_mac[k]);
+	}
+	printf("\n");
 	uint8_t dest_addr[MWIFI_ADDR_LEN] = {0};
 	do {
 		uint32_t mac_data[MWIFI_ADDR_LEN] = {0};
@@ -113,6 +137,7 @@ void bt_read_and_send(char *data)
 		}
 	} while (0);
 	
+	//check if the message is for the local node
 	uint8_t identicalMac = 1;
 	int i = 0;
 	for(i = 0; i < MWIFI_ADDR_LEN; i++)
@@ -138,17 +163,29 @@ void bt_read_and_send(char *data)
 			duration = cJSON_GetObjectItem(root, "Duration")->valueint;
 			modifyMatrix();
 		}
+		printf("make sure i didnt goof\n");
 		gpio_set_level(23, 1);
 		//write conditions for GET_MSG, RETURN_MSG here
 		cJSON_Delete(root);
 	}
 	else
 	{
+		mwifi_data_type_t data_type       = {0};
+		size_t size                      = MWIFI_PAYLOAD_LEN;
+		mdf_err_t ret                    = MDF_OK;
+		//send out to the correct node
+		size = 1024;
+		//size = asprintf(&jsonstring, "{\"src_addr\": \"" MACSTR "\", \"data\": %s}", MAC2STR(sta_mac), recv_data);
+		ret = mwifi_write(dest_addr, &data_type, data, size, true);
+		MDF_ERROR_GOTO(ret != MDF_OK, FREE_MEM, "<%s> mwifi_root_write", mdf_err_to_name(ret));
+		//gpio_set_level(15, 0);
+	FREE_MEM:
+        //MDF_FREE(data);
+        cJSON_Delete(root);
+		//printf("not me\n");
 		//send out
 	}
-	
-	
-	
+
 }
 
 //BT EVENT HANDLERS
@@ -215,6 +252,7 @@ static void esp_spp_cb(esp_spp_cb_event_t event, esp_spp_cb_param_t *param)
 		*/
 		//printf("First char: %d\n", cmdColor);
 		//printf("%s\n", bt_received_data);
+		bt_read_and_send((char *)param->data_ind.data);
 		esp_spp_write(param->write.handle, strlen(bt_received_data), 
 				(uint8_t *)bt_received_data);
 		
@@ -744,11 +782,11 @@ void modifyMatrix()
 {
 	int pixels[] = {0, 0, 0};
 	if((color & COLOR_RED) == COLOR_RED)
-		pixels[0] = 1;
+		pixels[2] = 1;
 	if((color & COLOR_GREEN) == COLOR_GREEN)
 		pixels[1] = 1;
 	if((color & COLOR_BLUE) == COLOR_BLUE)
-		pixels[2] = 1;
+		pixels[0] = 1;
 	clearMatrix();
 	int i;
 	switch (graphic)
@@ -757,39 +795,39 @@ void modifyMatrix()
 			for(i = 0; i < 3; i++)
 			{
 				if(pixels[i])
-					setUp(pixels[i]);
+					setUp(i);
 			}
 			break;
 		case DIRECTION_DOWN:
 			for(i = 0; i < 3; i++)
 			{
 				if(pixels[i])
-					setDown(pixels[i]);
+					setDown(i);
 			}
 			break;
 		case DIRECTION_LEFT:
 			for(i = 0; i < 3; i++)
 			{
 				if(pixels[i])
-					setLeft(pixels[i]);
+					setLeft(i);
 			}
 			break;
 		case DIRECTION_RIGHT:
 			for(i = 0; i < 3; i++)
 			{
 				if(pixels[i])
-					setRight(pixels[i]);
+					setRight(i);
 			}
 			break;
 		case DIRECTION_HERE:
 			for(i = 0; i < 3; i++)
 			{
 				if(pixels[i])
-					setHere(pixels[i]);
+					setHere(i);
 			}
 			break;
 	}
-	currentTime = 0;
+	currentTime = duration;
 }
 
 void parsePacket(cJSON * root)
@@ -1057,6 +1095,115 @@ static mdf_err_t event_loop_cb(mdf_event_loop_t event, void *ctx)
     return MDF_OK;
 }
 
+void timerCallback(TimerHandle_t pxTimer)
+{
+	static int timesCalled = 0;
+	static uint8_t als_MSB;
+	static uint8_t als_LSB;
+	static uint16_t alsVal;
+	static uint32_t luxVal;
+	static i2c_cmd_handle_t luxCmd;
+	
+	if(currentTime > 0)
+	{
+		currentTime--;
+	}
+	else if (currentTime == 0)
+	{
+		clearMatrix();
+	}
+	timesCalled ++;
+	luxCmd = i2c_cmd_link_create();
+	i2c_master_start(luxCmd);	//Start bit
+	i2c_master_write_byte(luxCmd, (LUX_SENSOR_ADDR << 1) | I2C_MASTER_WRITE, true);	//Address
+	i2c_master_write_byte(luxCmd, 0x04, true);		//Command: Read ALS (Ambient Light)
+	i2c_master_start(luxCmd);		//Start bit 
+	i2c_master_write_byte(luxCmd, (LUX_SENSOR_ADDR << 1) | I2C_MASTER_READ, true);	//specify a read from sensor
+	i2c_master_read_byte(luxCmd, &als_LSB, 0);	//Read LSB
+	i2c_master_read_byte(luxCmd, &als_MSB, 1);	//Read MSB, NAK
+	i2c_master_stop(luxCmd);	//stop bit
+	i2c_master_cmd_begin(0, luxCmd, 1000 / portTICK_RATE_MS);	//allow 1 second to send + read
+	i2c_cmd_link_delete(luxCmd);
+	
+	alsVal = (als_MSB << 8) | als_LSB;
+	luxVal = 0.0576 * alsVal;		//Constant retrieved from datasheet to convert ALS to lux
+	//printf("ALS Val: %d       Lux Val: %d\n", alsVal, luxVal);
+	
+	//normal light conditions
+	if(luxVal >= 100 && luxVal < 400)
+	{
+		//change over time
+		ledc_set_fade_time_and_start(LEDC_HIGH_SPEED_MODE, LEDC_CHANNEL_0,
+				NORMAL_DUTY_CYCLE, FADEDELAY, LEDC_FADE_NO_WAIT);
+		//ledc_set_fade_with_time(LEDC_HIGH_SPEED_MODE, LEDC_CHANNEL_0, NORMAL_DUTY_CYCLE, FADEDELAY);
+		//ledc_fade_start(LEDC_HIGH_SPEED_MODE, LEDC_CHANNEL_0, LEDC_FADE_NO_WAIT);
+	}
+	//Brightest light conditions
+	else if (luxVal >= 900)
+	{
+		//change over time
+		ledc_set_fade_time_and_start(LEDC_HIGH_SPEED_MODE, LEDC_CHANNEL_0,
+				BRIGHTEST_DUTY_CYCLE, FADEDELAY, LEDC_FADE_NO_WAIT);
+		//ledc_set_fade_with_time(LEDC_HIGH_SPEED_MODE, LEDC_CHANNEL_0, BRIGHTEST_DUTY_CYCLE, FADEDELAY);
+		//ledc_fade_start(LEDC_HIGH_SPEED_MODE, LEDC_CHANNEL_0, LEDC_FADE_NO_WAIT);
+	}
+    //Brighter light conditions
+	else if (luxVal >= 400)
+	{
+		//change over time
+		ledc_set_fade_time_and_start(LEDC_HIGH_SPEED_MODE, LEDC_CHANNEL_0,
+				BRIGHTER_DUTY_CYCLE, FADEDELAY, LEDC_FADE_NO_WAIT);
+		//ledc_set_fade_with_time(LEDC_HIGH_SPEED_MODE, LEDC_CHANNEL_0, BRIGHTER_DUTY_CYCLE, FADEDELAY);
+		//ledc_fade_start(LEDC_HIGH_SPEED_MODE, LEDC_CHANNEL_0, LEDC_FADE_NO_WAIT);
+	}
+	//Low light conditions
+	else
+	{
+		//change over time
+		ledc_set_fade_time_and_start(LEDC_HIGH_SPEED_MODE, LEDC_CHANNEL_0,
+				LOW_DUTY_CYCLE, FADEDELAY, LEDC_FADE_NO_WAIT);
+		//ledc_set_fade_with_time(LEDC_HIGH_SPEED_MODE, LEDC_CHANNEL_0, LOW_DUTY_CYCLE, FADEDELAY);
+		//ledc_fade_start(LEDC_HIGH_SPEED_MODE, LEDC_CHANNEL_0, LEDC_FADE_NO_WAIT);
+	}
+	if (timesCalled == 10)
+	{
+		timesCalled = 0;
+		uint8_t primary                 = 0;
+		wifi_second_chan_t second       = 0;
+		mesh_addr_t parent_bssid        = {0};
+		uint8_t sta_mac[MWIFI_ADDR_LEN] = {0};
+		mesh_assoc_t mesh_assoc         = {0x0};
+		wifi_sta_list_t wifi_sta_list   = {0x0};
+
+		esp_wifi_get_mac(ESP_IF_WIFI_STA, sta_mac);
+		esp_wifi_ap_get_sta_list(&wifi_sta_list);
+		esp_wifi_get_channel(&primary, &second);
+		esp_wifi_vnd_mesh_get(&mesh_assoc);
+		esp_mesh_get_parent_bssid(&parent_bssid);
+
+		MDF_LOGI("System information, channel: %d, layer: %d, self mac: " MACSTR ", parent bssid: " MACSTR
+				 ", parent rssi: %d, node num: %d, free heap: %u", primary,
+				 esp_mesh_get_layer(), MAC2STR(sta_mac), MAC2STR(parent_bssid.addr),
+				 mesh_assoc.rssi, esp_mesh_get_total_node_num(), esp_get_free_heap_size());
+
+		for (int i = 0; i < wifi_sta_list.num; i++) {
+			MDF_LOGI("Child mac: " MACSTR, MAC2STR(wifi_sta_list.sta[i].mac));
+		}
+
+	#ifdef MEMORY_DEBUG
+
+		if (!heap_caps_check_integrity_all(true)) {
+			MDF_LOGE("At least one heap is corrupt");
+		}
+
+		mdf_mem_print_heap();
+		mdf_mem_print_record();
+		mdf_mem_print_task();
+	#endif /**< MEMORY_DEBUG */
+	}
+}
+
+
 void setAddress(int i)
 {
 	if (i == 0)
@@ -1152,9 +1299,70 @@ void init_matrix()
 	clearMatrix();	
 }
 
+void init_pwm()
+{
+	//OE Dimmer PWM config
+	ledc_timer_config_t pwmConfig;
+	pwmConfig.speed_mode = LEDC_HIGH_SPEED_MODE;
+	pwmConfig.duty_resolution = LEDC_TIMER_13_BIT;
+	pwmConfig.timer_num = LEDC_TIMER_0;
+	pwmConfig.freq_hz = 5000;
+	
+	ledc_channel_config_t OEConfig;
+	OEConfig.gpio_num = OE;
+	OEConfig.speed_mode = LEDC_HIGH_SPEED_MODE;
+	OEConfig.channel = LEDC_CHANNEL_0;
+	OEConfig.intr_type = LEDC_INTR_DISABLE;
+	OEConfig.timer_sel = LEDC_TIMER_0;
+	OEConfig.duty = 0;
+	
+	ledc_timer_config(&pwmConfig);
+	ledc_channel_config(&OEConfig);
+	
+	ledc_fade_func_install(0);
+}
+
+void init_i2c()
+{
+	//I2C peripheral config
+	i2c_config_t luxConfig;
+	luxConfig.mode = I2C_MODE_MASTER;
+	luxConfig.sda_io_num = I2CSDA;
+	luxConfig.sda_pullup_en = GPIO_PULLUP_ENABLE;
+	luxConfig.scl_io_num = I2CSCL;
+	luxConfig.scl_pullup_en = GPIO_PULLUP_ENABLE;
+	luxConfig.master.clk_speed = 100000;
+	i2c_param_config(0, &luxConfig);
+	i2c_driver_install(0, I2C_MODE_MASTER, 0, 0, 0);
+
+	//configure lux sensor settings
+	i2c_cmd_handle_t luxCmd = i2c_cmd_link_create();
+	i2c_master_start(luxCmd);	//Start bit
+	i2c_master_write_byte(luxCmd, (LUX_SENSOR_ADDR << 1) | I2C_MASTER_WRITE, true);	//Address
+	i2c_master_write_byte(luxCmd, 0x00, true);		//Command: Write Config
+	i2c_master_write_byte(luxCmd, 0b00000000, true); //Write Config Properties: 1 gain, 800 ms int time, etc.
+	i2c_master_write_byte(luxCmd, 0b11000000, true);
+	i2c_master_stop(luxCmd);	//stop bit
+	i2c_master_cmd_begin(0, luxCmd, 1000 / portTICK_RATE_MS);	//all 1 second to send
+	i2c_cmd_link_delete(luxCmd);
+	
+	luxCmd = i2c_cmd_link_create();
+	i2c_master_start(luxCmd);	//Start bit
+	i2c_master_write_byte(luxCmd, (LUX_SENSOR_ADDR << 1) | I2C_MASTER_WRITE, true);	//Address
+	i2c_master_write_byte(luxCmd, 0x03, true);		//Command: PowerSave
+	i2c_master_write_byte(luxCmd, 0b00000000, true); //Write Config Properties: Enable power save
+	i2c_master_write_byte(luxCmd, 0b00000000, true);
+	i2c_master_stop(luxCmd);	//stop bit
+	i2c_master_cmd_begin(0, luxCmd, 1000 / portTICK_RATE_MS);	//all 1 second to send
+	i2c_cmd_link_delete(luxCmd);	
+}
+
 void app_main()
 {
 	init_bt();
+	init_pwm();
+	init_i2c();
+	
 	gpio_pad_select_gpio(23);
 	gpio_set_direction(23, GPIO_MODE_OUTPUT);
 	gpio_set_level(23, 0);
@@ -1164,7 +1372,7 @@ void app_main()
 	gpio_set_direction(15, GPIO_MODE_OUTPUT);
 	
 	
-	int rootSel = 1;	//set as root
+	int rootSel = 1;	//0 root, 1 node
     mwifi_init_config_t cfg = MWIFI_INIT_CONFIG_DEFAULT();
     mwifi_config_t config   = {
         .channel   = CONFIG_MESH_CHANNEL,
@@ -1214,16 +1422,21 @@ void app_main()
 	
 	//setLeft(2);
 	xTaskCreatePinnedToCore(&matrix_task, "matrix_task", 4096, NULL, 7, NULL, 1);
+	
+	//Creation of a 1 second periodic task
+	TimerHandle_t prdTimer;
+	prdTimer = xTimerCreate("Light_Sensing_Task", 1000/portTICK_PERIOD_MS, pdTRUE, (void *) 1, timerCallback);
+	xTimerStart(prdTimer, 0);
     /* Periodic print system information */
-    TimerHandle_t timer = xTimerCreate("print_system_info", 10000 / portTICK_RATE_MS,
-                                       true, NULL, print_system_info_timercb);
-    xTimerStart(timer, 0);
+    //TimerHandle_t timer = xTimerCreate("print_system_info", 10000 / portTICK_RATE_MS,
+    //                                   true, NULL, print_system_info_timercb);
+    //xTimerStart(timer, 0);
 
     esp_wifi_get_mac(ESP_IF_WIFI_STA, sta_mac);
 	
 	setAllGreen();
-	setAllBlue();
-	setAllRed();
+	//setAllBlue();
+	//setAllRed();
 	
     /**
      * @brief uart handle task:
@@ -1232,6 +1445,7 @@ void app_main()
      */
     //xTaskCreate(uart_handle_task, "uart_handle_task", 4 * 1024,
                // NULL, CONFIG_MDF_TASK_DEFAULT_PRIOTY, NULL);
+	/*
 	while(1)
 	{
 		vTaskDelay(100/portTICK_PERIOD_MS);
@@ -1276,4 +1490,5 @@ void app_main()
 		}
 			
 	}
+	*/
 }
